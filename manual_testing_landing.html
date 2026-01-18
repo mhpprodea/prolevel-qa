@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Manual QA Testing Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(79, 70, 229, 0.08);
+            border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '✦';
+            position: absolute;
+            left: -30px;
+            color: #4f46e5;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #9333ea, #c026d3);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #9333ea;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
+            color: white;
+            padding: 180px 0 120px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0.6;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1));
+        }
+
+        /* Floating particles effect */
+        .hero .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        .hero .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .hero .particle:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .hero .particle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 70%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: #4f46e5;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2), 0 5px 15px rgba(79, 70, 229, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(79, 70, 229, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #eef2ff 0%, #ffffff 50%, #f0fdfa 100%);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4f46e5, #06b6d4, transparent);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #06b6d4);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 5rem;
+            margin-top: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #06b6d4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.15);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(79, 70, 229, 0.35);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            position: relative;
+        }
+
+        .why-choose .section-title {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .why-choose .section-subtitle {
+            color: #94a3b8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-top: 5rem;
+        }
+
+        .feature {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-number {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4), 0 0 60px rgba(79, 70, 229, 0.2);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .feature-number::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .feature:hover .feature-number {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(79, 70, 229, 0.5), 0 0 80px rgba(6, 182, 212, 0.3);
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .feature p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            opacity: 0.6;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 3px solid white;
+            color: white;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #4f46e5;
+            border-color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 1.05rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="container">
+            <div class="logo">ProLevel QA</div>
+            <ul class="nav-links">
+                <li><a href="#services">What We Do</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#contact">Let's Talk</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Launch Confident. Move Fast. Ship Bug-Free Software.</h1>
+                <p>Stop losing customers to preventable bugs and last-minute surprises. With 10+ years of hands-on manual testing experience, we identify critical issues before launch—not after users find them. Every release is tested with real user scenarios in mind, helping you reduce costly fixes, protect your reputation, and deliver smooth experiences.</p>
+                <a href="https://docs.google.com/forms/d/1WefQirFO7YXj-O5UgRGou5pdCL1heh2VOCYyPLU6URY/viewform" class="cta-button" target="_blank">Get Your Free Quality Assessment</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">How We Can Help Your Team</h2>
+            <p class="section-subtitle">Targeted testing approaches designed for real business impact</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✓</div>
+                    <h3>End-to-End Feature Validation</h3>
+                    <p>Complete workflow testing that mirrors how real users interact with your product, catching integration issues and edge cases before they reach production.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👤</div>
+                    <h3>UAT & Release Readiness</h3>
+                    <p>Pre-launch validation ensuring your software meets business goals and user expectations, with clear go/no-go recommendations based on risk assessment.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Strategic Exploratory Testing</h3>
+                    <p>Creative, scenario-based testing that uncovers unexpected behaviors and usability concerns automation can't detect, protecting your reputation.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Multi-Platform Verification</h3>
+                    <p>Testing across browsers, devices, and screen sizes to guarantee your users get a consistent, quality experience regardless of how they access your product.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Change Impact Analysis</h3>
+                    <p>Systematic regression checks after each update to verify new features work while existing functionality remains stable and reliable.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Actionable Quality Reports</h3>
+                    <p>Clear documentation with prioritized findings, reproduction steps, and severity ratings that help your team make informed decisions quickly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section id="why-choose" class="why-choose">
+        <div class="container">
+            <h2 class="section-title">What Sets This Service Apart</h2>
+            <p class="section-subtitle">A decade of experience focused on quality that matters</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-number">10+</div>
+                    <h3>Years in the Field</h3>
+                    <p>A decade of manual testing across diverse projects means we've seen what breaks, why it breaks, and how to catch it early.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-number">👥</div>
+                    <h3>User-First Mindset</h3>
+                    <p>Testing isn't just about finding bugs—it's about ensuring your users have experiences worth recommending to others.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-number">⚡</div>
+                    <h3>Agile Integration</h3>
+                    <p>Work that fits your sprint cycles and delivery timeline, providing fast feedback when your team needs it most.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-number">🎯</div>
+                    <h3>UI/UX Quality Review</h3>
+                    <p>We evaluate your interface and user flows, providing actionable feedback on design consistency, usability issues, and user experience improvements.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-number">📝</div>
+                    <h3>Developer-Friendly Communication</h3>
+                    <p>Bug reports that developers actually want to read—clear context, steps to reproduce, and suggested severity without the noise.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-number">🌐</div>
+                    <h3>Versatile Platform Coverage</h3>
+                    <p>We test any software—SaaS platforms, websites, mobile applications, e-commerce stores, and everything in between. Your platform, our expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>Let's Protect Your Software Quality Together</h2>
+            <p>Reach out to discuss how manual testing can strengthen your next release</p>
+            <a href="https://docs.google.com/forms/d/1WefQirFO7YXj-O5UgRGou5pdCL1heh2VOCYyPLU6URY/viewform" class="cta-button cta-secondary" target="_blank">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="privacy.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#06b6d4'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Privacy Policy</a></p>
+        </div>
+    </footer>
+</body>
+</html>

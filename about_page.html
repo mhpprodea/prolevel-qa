@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - ProLevel QA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header/Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(79, 70, 229, 0.08);
+            border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '✦';
+            position: absolute;
+            left: -30px;
+            color: #4f46e5;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #06b6d4);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
+            color: white;
+            padding: 150px 0 80px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        /* About Content */
+        .about-content {
+            padding: 80px 0;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #64748b;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .value-section {
+            margin: 5rem 0;
+        }
+
+        .value-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.08);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(79, 70, 229, 0.15);
+        }
+
+        .value-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #4f46e5;
+        }
+
+        .value-card p {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        .services-list {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 5rem 0;
+            margin: 5rem 0;
+            border-radius: 30px;
+        }
+
+        .services-list h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            color: #f1f5f9;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .service-item::before {
+            content: '✓';
+            color: #06b6d4;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .service-item span {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 1.05rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #06b6d4;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .intro h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">ProLevel QA</a>
+            <ul class="nav-links">
+                <li><a href="index.html#services">What We Do</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Let's Talk</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>About ProLevel QA</h1>
+            <p>Building better software, one test at a time</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div style="max-width: 750px; margin: 0 auto; text-align: left; padding: 2rem 0;">
+                <p style="font-size: 1.1rem; color: #475569; line-height: 1.9; margin-bottom: 1.5rem;">ProLevel QA was founded by Elena, who brings over 10+ years of hands-on manual testing experience to help teams ship software they can trust.</p>
+
+                <p style="font-size: 1.1rem; color: #475569; line-height: 1.9; margin-bottom: 1.5rem;">We don't just find bugs—we ensure your product is truly market-ready. Acting as the bridge between your vision and final release, we verify that every feature is stable, intuitive, and delivers the experience your users expect. If you're frustrated with buggy releases or negative user feedback, we're here to bring structure and reliability to your QA process.</p>
+
+                <p style="font-size: 1.1rem; color: #475569; line-height: 1.9; margin-bottom: 1.5rem;">We identify usability gaps and edge cases that automated tools can't catch, testing from a real-world perspective to protect your reputation. We help organize your testing workflow, prioritize critical fixes, and spot risks early—preventing costly delays and last-minute surprises. Beyond reporting bugs, we deliver detailed UX feedback that improves how your product feels, not just how it functions.</p>
+
+                <p style="font-size: 1.1rem; color: #475569; line-height: 1.9; margin-bottom: 1.5rem;">We test websites and web applications, WordPress platforms, Shopify eCommerce stores, SaaS applications, mobile apps (Android), and help build custom QA strategies and processes from scratch.</p>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Improve Your Software Quality?</h2>
+                <p>Let's discuss how we can help make your next release your best one yet.</p>
+                <a href="https://docs.google.com/forms/d/1WefQirFO7YXj-O5UgRGou5pdCL1heh2VOCYyPLU6URY/viewform" class="cta-button" target="_blank">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="privacy.html">Privacy Policy</a> | <a href="index.html">Home</a></p>
+        </div>
+    </footer>
+</body>
+</html>
