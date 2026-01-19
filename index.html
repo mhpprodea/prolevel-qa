@@ -97,6 +97,10 @@
             width: 100%;
         }
 
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
@@ -467,6 +471,169 @@
             opacity: 0.6;
         }
 
+        /* Reviews Section */
+        .reviews-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .reviews-carousel {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto;
+            overflow: hidden;
+        }
+
+        .reviews-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .review-card {
+            min-width: 100%;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            text-align: center;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1.2rem;
+            color: #475569;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .reviewer-info {
+            color: #64748b;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .carousel-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #4f46e5;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.08);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.12);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e293b;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: #fafbfc;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #4f46e5;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 2rem 1.5rem 2rem;
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
         .cta-section h2 {
             font-size: 2.8rem;
             margin-bottom: 1.5rem;
@@ -549,8 +716,9 @@
             <div class="logo">ProLevel QA</div>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
-                <li><a href="#services">What We Do</a></li>
-                <li><a href="#contact">Let's Talk</a></li>
+                <li><a href="bug_demo.html">Bugs Showcase</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
     </header>
@@ -564,7 +732,7 @@
             <div class="hero-content">
                 <h1>Launch Confident. Move Fast. Ship Bug-Free Software.</h1>
                 <p>Stop losing customers to preventable bugs and last-minute surprises. With 10+ years of hands-on manual testing experience, we identify critical issues before launch, not after users find them. Every release is tested with real user scenarios in mind, helping you reduce costly fixes, protect your reputation, and deliver smooth experiences.</p>
-                <a href="https://docs.google.com/forms/d/1WefQirFO7YXj-O5UgRGou5pdCL1heh2VOCYyPLU6URY/viewform" class="cta-button" target="_blank">Get Your Free Quality Assessment</a>
+                <a href="contact.html" class="cta-button">Get Your Free Quality Assessment</a>
             </div>
         </div>
     </section>
@@ -597,7 +765,7 @@
                 <div class="service-card">
                     <div class="service-icon">💻</div>
                     <h3>Multi-Platform Verification</h3>
-                    <p>Testing across browsers, devices, and screen sizes to guarantee your users get a consistent, quality experience regardless of how they access your product.</p>
+                    <p>Testing across browsers, devices, and screen sizes to guarantee your users get a consistent, quality experience regardless of how they access your product. iOS and Android mobile testing included.</p>
                 </div>
                 
                 <div class="service-card">
@@ -649,13 +817,135 @@
         </div>
     </section>
 
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <p class="section-subtitle">Real feedback from satisfied clients</p>
+            
+            <div class="reviews-carousel">
+                <div class="reviews-track">
+                    <div class="review-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
+                        <p class="reviewer-info">Finance Application Testing Client</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
+                        <p class="reviewer-info">Mobile Game Testing Client</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
+                        <p class="reviewer-info">Time Tracking Website Client</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <button class="carousel-btn" id="prevBtn">←</button>
+                    <button class="carousel-btn" id="nextBtn">→</button>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about our testing services</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does pricing work?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer custom pricing tailored to your project needs, starting at $45/hour. Contact us for a detailed quote based on your specific requirements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does testing take?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Simple testing projects can be completed in 24-48 hours. The exact timeline depends on the complexity and scope of work. We'll provide a clear estimate after reviewing your project requirements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer one-time projects or ongoing testing?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer both! Whether you need a one-time testing engagement for a specific release or ongoing QA support for continuous development, we can accommodate your needs.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you provide test documentation?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! We provide comprehensive test summaries, screenshots, videos, and detailed bug reports—everything you need to clearly understand the issues, their impact, and steps to reproduce them.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can you integrate with our development workflow?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, we can work with your existing tools and processes. Please note that we may not always be available at the same time as your development team due to timezone differences, but we ensure clear communication and timely updates.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you test on real devices?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, we test on real physical devices to ensure accurate results. We can also use virtual environments for specific devices, browsers, or configurations upon request.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section id="contact" class="cta-section">
         <div class="container">
             <h2>Let's Protect Your Software Quality Together</h2>
             <p>Reach out to discuss how manual testing can strengthen your next release</p>
-            <p style="font-size: 1rem; opacity: 0.9; margin-bottom: 2rem;">Custom pricing tailored to your needs • Starting at $45/hour</p>
-            <a href="https://docs.google.com/forms/d/1WefQirFO7YXj-O5UgRGou5pdCL1heh2VOCYyPLU6URY/viewform" class="cta-button cta-secondary" target="_blank">Get In Touch</a>
+            <a href="contact.html" class="cta-button cta-secondary">Get In Touch</a>
         </div>
     </section>
 
@@ -666,5 +956,83 @@
             <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="privacy.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#06b6d4'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Privacy Policy</a></p>
         </div>
     </footer>
+
+    <script>
+        // Scroll-based navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function highlightNav() {
+            let scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 150;
+                const sectionId = section.getAttribute('id');
+                
+                // Skip highlighting for contact section
+                if (sectionId === 'contact') return;
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+
+        // Reviews Carousel
+        const track = document.querySelector('.reviews-track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+        const totalReviews = 3;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalReviews) % totalReviews;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalReviews;
+            updateCarousel();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.dataset.index);
+                updateCarousel();
+            });
+        });
+
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

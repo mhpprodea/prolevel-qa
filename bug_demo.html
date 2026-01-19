@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See What We Catch - ProLevel QA</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234f46e5'/><stop offset='50%' style='stop-color:%237c3aed'/><stop offset='100%' style='stop-color:%2306b6d4'/></linearGradient></defs><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='60' font-weight='bold' fill='url(%23g)'>PQ</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9ff;
+            color: #1a1a2e;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        header {
+            background: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .showcase {
+            padding: 80px 20px;
+            min-height: 80vh;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(79,70,229,0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .slide.active { display: block; animation: fadeIn 0.4s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #06b6d4);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        
+        .slide-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .slide-header p { opacity: 0.95; }
+        
+        .slide-content { padding: 3rem; }
+        
+        .bug-demo {
+            background: #fafbfc;
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .bug-marker {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .demo-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: #cbd5e1;
+            color: white;
+            cursor: not-allowed;
+            margin: 0.5rem;
+        }
+        
+        .demo-text {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .typo { color: #ef4444; font-weight: 600; }
+        
+        .overlapping {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .overlap-box {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .overlap-box:nth-child(2) {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            background: #f8f9ff;
+        }
+        
+        .dropdown {
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8f9ff;
+            width: 200px;
+            cursor: not-allowed;
+            color: #94a3b8;
+        }
+        
+        .report-section {
+            border: 2px solid #4f46e5;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .report-field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .report-field strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-field p, .report-field ol {
+            color: #64748b;
+        }
+        
+        .severity {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .ux-box {
+            background: #f0fdfa;
+            border: 2px solid #14b8a6;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+        
+        .ux-box h4 {
+            color: #0f766e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ux-box p {
+            color: #134e4a;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: #f8f9ff;
+        }
+        
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover { transform: translateY(-2px); }
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+        
+        .counter { font-weight: 600; color: #64748b; }
+        
+        footer {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        footer a:hover { color: #06b6d4; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">ProLevel QA</a>
+        </div>
+    </header>
+    
+    <div class="showcase">
+        <!-- Slide 1: Intro -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h2>Real Bugs We Catch</h2>
+                <p>Examples of issues we identify during manual testing</p>
+            </div>
+            <div class="slide-content">
+                <h3 style="margin-bottom: 1rem;">Welcome to Our Bug Showcase</h3>
+                <p style="color: #64748b; line-height: 1.8; margin-bottom: 2rem;">
+                    Below are real examples of bugs we commonly find during testing. These are actual issues that can break user experience, 
+                    block critical flows, and damage your reputation if they reach production.
+                </p>
+                <div style="background: #f8f9ff; padding: 2rem; border-radius: 12px; border-left: 4px solid #4f46e5;">
+                    <h4 style="margin-bottom: 1rem; color: #4f46e5;">What We'll Show:</h4>
+                    <ul style="color: #64748b; line-height: 2; margin-left: 1.5rem;">
+                        <li>Non-functional buttons and broken links</li>
+                        <li>Typos and content errors</li>
+                        <li>Overlapping UI elements</li>
+                        <li>Form validation issues</li>
+                        <li>Sample bug report format</li>
+                        <li>UI/UX improvement recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Multiple Bugs Together -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>🐛 Common Critical Bugs</h2>
+                <p>Functionality Issues</p>
+            </div>
+            <div class="slide-content">
+                <h3 style="margin-bottom: 2rem;">Demo E-Commerce Site - Checkout Page</h3>
+                
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #1</span>
+                    <h4 style="margin-bottom: 1rem;">Non-Functional Submit Button</h4>
+                    <p style="color: #64748b; margin-bottom: 1rem;">Try clicking this button - nothing happens!</p>
+                    <button class="demo-btn">Complete Purchase</button>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Button appears clickable but has no event handler. Users cannot complete checkout.
+                    </p>
+                </div>
+
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #2</span>
+                    <h4 style="margin-bottom: 1rem;">Typo in Important Text</h4>
+                    <div class="demo-text">
+                        <p>Thank you for your <span class="typo">purhcase</span>! Your order will be shipped within 2-3 business days.</p>
+                        <p style="margin-top: 1rem;">Contact us at <span class="typo">suport@shopnow.com</span> for assistance.</p>
+                    </div>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Misspelled "purchase" and "support" - damages brand credibility and trust.
+                    </p>
+                </div>
+
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #3</span>
+                    <h4 style="margin-bottom: 1rem;">Broken Link</h4>
+                    <p style="color: #64748b; margin-bottom: 0.5rem;">Click to view our <a href="#" style="color: #4f46e5; text-decoration: underline;" onclick="alert('Error 404: Page not found'); return false;">return policy</a></p>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Link returns 404 error. Users cannot access important policy information.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: UI/Layout Bugs -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>🐛 Visual & Layout Bugs</h2>
+                <p>UI Issues</p>
+            </div>
+            <div class="slide-content">
+                <h3 style="margin-bottom: 2rem;">Product Listing Page</h3>
+                
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #4</span>
+                    <h4 style="margin-bottom: 1rem;">Overlapping Elements</h4>
+                    <div class="overlapping">
+                        <div class="overlap-box" style="position: relative;">
+                            <strong>Product Card 1</strong>
+                            <p>Premium Wireless Mouse - $49.99</p>
+                        </div>
+                        <div class="overlap-box">
+                            <strong>Product Card 2</strong>
+                            <p>Mechanical Keyboard - $129.99</p>
+                        </div>
+                    </div>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 4rem;">
+                        ⚠️ <strong>Issue:</strong> Product cards overlap on mobile screens (320px width). Content unreadable.
+                    </p>
+                </div>
+
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #5</span>
+                    <h4 style="margin-bottom: 1rem;">Non-Responsive Dropdown</h4>
+                    <p style="color: #64748b; margin-bottom: 0.5rem;">Select category:</p>
+                    <select class="dropdown" disabled>
+                        <option>Choose a category...</option>
+                    </select>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Dropdown appears but doesn't open when clicked. No filtering possible.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Form/Data Bugs -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>🐛 Form & Data Issues</h2>
+                <p>Data Integrity Problems</p>
+            </div>
+            <div class="slide-content">
+                <h3 style="margin-bottom: 2rem;">Contact Form</h3>
+                
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #6</span>
+                    <h4 style="margin-bottom: 1rem;">Data Not Saved</h4>
+                    <form style="max-width: 400px;" onsubmit="alert('Form submitted but data was not saved!'); return false;">
+                        <input type="text" placeholder="Your Name" style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem;">
+                        <input type="email" placeholder="Your Email" style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem;">
+                        <button type="submit" class="demo-btn" style="cursor: pointer; background: #4f46e5;">Submit</button>
+                    </form>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Form submits successfully but data is not stored in database. All submissions lost.
+                    </p>
+                </div>
+
+                <div class="bug-demo">
+                    <span class="bug-marker">BUG #7</span>
+                    <h4 style="margin-bottom: 1rem;">No Validation on Required Fields</h4>
+                    <p style="color: #64748b; margin-bottom: 0.5rem;">Email field accepts invalid formats:</p>
+                    <input type="text" value="not-an-email" style="width: 100%; max-width: 300px; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 8px;">
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem;">
+                        ⚠️ <strong>Issue:</strong> Form accepts "not-an-email" as valid email. No client-side validation.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Bug Report Sample -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>📋 How We Report Bugs</h2>
+                <p>Professional Documentation</p>
+            </div>
+            <div class="slide-content">
+                <h3 style="margin-bottom: 1.5rem;">Sample Bug Report</h3>
+                
+                <div class="report-section">
+                    <div class="report-field">
+                        <strong>Title:</strong>
+                        <p>Checkout button non-functional - blocks all purchases</p>
+                    </div>
+
+                    <div class="report-field">
+                        <strong>Priority:</strong>
+                        <span class="severity">CRITICAL</span>
+                    </div>
+
+                    <div class="report-field">
+                        <strong>Steps to Reproduce:</strong>
+                        <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Navigate to product page</li>
+                            <li>Click "Add to Cart"</li>
+                            <li>Go to checkout page</li>
+                            <li>Fill in shipping information</li>
+                            <li>Click "Complete Purchase" button</li>
+                        </ol>
+                    </div>
+
+                    <div class="report-field">
+                        <strong>Actual Result:</strong>
+                        <p>Button click has no effect. Console error: "processOrder is not defined"</p>
+                    </div>
+
+                    <div class="report-field">
+                        <strong>Expected Result:</strong>
+                        <p>Order should be processed and user redirected to confirmation page with order number.</p>
+                    </div>
+
+                    <div class="report-field">
+                        <strong>Environment:</strong>
+                        <p>Chrome 120.0 (Windows 11), Safari 17.2 (macOS 14.2), iPhone 15 Pro (iOS 17.2)</p>
+                    </div>
+                </div>
+
+                <div class="ux-box">
+                    <h4>💡 UI/UX Improvement Recommendations</h4>
+                    <p style="margin-bottom: 1rem;">Beyond bug reporting, we provide actionable suggestions to improve user experience:</p>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>Add order tracking functionality:</strong> After purchase, provide tracking number and link to carrier website so customers can monitor delivery status in real-time</li>
+                        <li><strong>Missing confirmation email:</strong> Send automated email with order details, tracking link, and estimated delivery date</li>
+                        <li><strong>Add loading state:</strong> Show spinner when button is clicked to indicate order is being processed</li>
+                        <li><strong>Improve error messaging:</strong> Display clear, user-friendly error messages when payment fails or issues occur (e.g., "Payment declined - please try another card")</li>
+                        <li><strong>Add guest checkout option:</strong> Allow purchases without account creation to reduce friction and cart abandonment</li>
+                        <li><strong>Accessibility improvements:</strong> Add ARIA labels for screen readers, improve keyboard navigation for checkout flow</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="contact.html" style="display: inline-block; padding: 1.2rem 3rem; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);">
+                        Let's Talk About Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="prev" onclick="changeSlide(-1)">← Previous</button>
+            <span class="counter" id="counter">1 / 5</span>
+            <button class="nav-btn" id="next" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="index.html">Home</a> | 
+                <a href="about.html">About</a> | 
+                <a href="contact.html">Contact</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        let current = 1;
+        const total = 5;
+        
+        function changeSlide(direction) {
+            current += direction;
+            if (current > total) current = total;
+            if (current < 1) current = 1;
+            
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(s => s.classList.remove('active'));
+            slides[current - 1].classList.add('active');
+            
+            document.getElementById('counter').textContent = current + ' / ' + total;
+            document.getElementById('prev').disabled = current === 1;
+            document.getElementById('next').disabled = current === total;
+        }
+        
+        document.getElementById('prev').disabled = true;
+    </script>
+</body>
+</html>
