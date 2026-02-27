@@ -507,7 +507,7 @@
         .reviews-track {
             display: flex;
             gap: 1.5rem;
-            animation: marquee 40s linear infinite;
+            animation: marquee 65s linear infinite;
             width: max-content;
             padding: 1rem 0 2rem;
         }
@@ -545,6 +545,40 @@
             flex-shrink: 0;
         }
 
+        .reviews-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .reviews-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+            flex-shrink: 0;
+        }
+
+        .reviews-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+        }
+
+        .reviews-btn:active {
+            transform: scale(0.95);
+        }
+
         @media (max-width: 768px) {
             .reviews-marquee-wrapper::before,
             .reviews-marquee-wrapper::after {
@@ -558,14 +592,14 @@
 
             .reviews-track {
                 gap: 1rem;
-                animation-duration: 32s;
+                animation-duration: 52s;
             }
         }
 
         .review-text {
             font-size: 0.98rem;
             color: #475569;
-            font-style: italic;
+            font-style: normal;
             margin-bottom: 1.2rem;
             line-height: 1.7;
         }
@@ -755,7 +789,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Launch Confident. Ship Quality. Sleep at Night.</h1>
-                <p>Every release carries risk — bugs you haven't found yet, edge cases your team didn't think to test, UX friction costing you real users. With 10+ years of hands-on manual testing, we catch those issues before your customers do. You get clear, actionable reports and the confidence to ship knowing your product has been thoroughly put through its paces.</p>
+                <p>Every release carries risk bugs you haven't found yet, edge cases your team didn't think to test, UX friction costing you real users. With 10+ years of hands-on manual testing, we catch those issues before your customers do. You get clear, actionable reports and the confidence to ship knowing your product has been thoroughly put through its paces.</p>
                 <a href="contact.html" class="cta-button">Get Your Free Quality Assessment</a>
             </div>
         </div>
@@ -777,7 +811,7 @@
                 <div class="service-card">
                     <div class="service-icon">👤</div>
                     <h3>UAT & Release Readiness</h3>
-                    <p>Pre-launch testing that confirms your software is ready for real users. We flag what's broken, what's confusing, and what could get in the way of a smooth release — so you can go live with confidence.</p>
+                    <p>Pre-launch testing that confirms your software is ready for real users. We flag what's broken, what's confusing, and what could get in the way of a smooth release so you can go live with confidence.</p>
                 </div>
                 
                 <div class="service-card">
@@ -853,141 +887,144 @@
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
-                        <p class="reviewer-info">— Jon, CEO · Finance Application</p>
+                        <p class="reviewer-info">Jon, CEO · Finance Application</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
-                        <p class="reviewer-info">— Tatiana, CEO · Mobile Game</p>
+                        <p class="reviewer-info">Tatiana, CEO · Mobile Game</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
-                        <p class="reviewer-info">— Anthony · Time Tracking App</p>
+                        <p class="reviewer-info">Anthony · Time Tracking App</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4.5"></div>
                         <p class="review-text">"Needed thorough bug testing for our fashion platform STYLD before beta launch. Found real issues we hadn't caught ourselves. Good communication, solid report. Would recommend for anyone needing pre-launch QA."</p>
-                        <p class="reviewer-info">— STYLD · Beta Fashion Platform</p>
+                        <p class="reviewer-info">STYLD · Beta Fashion Platform</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4.9"></div>
                         <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
-                        <p class="reviewer-info">— Athletic Brewing Company</p>
+                        <p class="reviewer-info">Athletic Brewing Company</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Hired for a pre-launch round before a pretty stressful release. Found a data sync issue we genuinely hadn't seen internally. The report was clear, steps were easy to follow, our dev fixed it same day. Will use again for sure."</p>
-                        <p class="reviewer-info">— James R., Backend Team Lead</p>
+                        <p class="reviewer-info">James R., Backend Team Lead</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"We had users dropping off during checkout and blamed it on pricing. Turns out the promo code field was throwing a silent error on certain browsers and just... doing nothing. No message, nothing. That bug alone was probably costing us real money."</p>
-                        <p class="reviewer-info">— Sophie L., E-Commerce Owner</p>
+                        <p class="reviewer-info">Sophie L., E-Commerce Owner</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Good communication throughout and very thorough. Flagged some UX things I wasn't expecting, like our sign-up form resetting completely on a validation error which is apparently a big drop-off trigger. Fixed it and numbers improved."</p>
-                        <p class="reviewer-info">— David K., Product Manager</p>
+                        <p class="reviewer-info">David K., Product Manager</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4"></div>
                         <p class="review-text">"Good tester, knows what to look for. Turnaround was a bit slower than expected but the quality of the report made up for it. Found a navigation issue on mobile that we'd missed for months. Would hire again with more lead time."</p>
-                        <p class="reviewer-info">— Nina B., Startup Founder</p>
+                        <p class="reviewer-info">Nina B., Startup Founder</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Honestly didn't expect UX feedback on top of the bug report but it was the most useful part. Pointed out that our main action button wasn't visible on smaller phones without scrolling. Our bounce rate on that screen dropped after the fix."</p>
-                        <p class="reviewer-info">— Tom W., iOS App Developer</p>
+                        <p class="reviewer-info">Tom W., iOS App Developer</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"We kept getting vague user complaints about the app being confusing. The QA review came back with actual usability issues, unclear labels, no feedback after saving, a filter that didn't reset properly. Our designer said it was the most useful feedback doc she'd seen."</p>
-                        <p class="reviewer-info">— Rachel M., Head of Product</p>
+                        <p class="reviewer-info">Rachel M., Head of Product</p>
                     </div>
 
                     <!-- Duplicate set for seamless loop -->
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
-                        <p class="reviewer-info">— Jon, CEO · Finance Application</p>
+                        <p class="reviewer-info">Jon, CEO · Finance Application</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
-                        <p class="reviewer-info">— Tatiana, CEO · Mobile Game</p>
+                        <p class="reviewer-info">Tatiana, CEO · Mobile Game</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
-                        <p class="reviewer-info">— Anthony · Time Tracking App</p>
+                        <p class="reviewer-info">Anthony · Time Tracking App</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4.5"></div>
                         <p class="review-text">"Needed thorough bug testing for our fashion platform STYLD before beta launch. Found real issues we hadn't caught ourselves. Good communication, solid report. Would recommend for anyone needing pre-launch QA."</p>
-                        <p class="reviewer-info">— STYLD · Beta Fashion Platform</p>
+                        <p class="reviewer-info">STYLD · Beta Fashion Platform</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4.9"></div>
                         <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
-                        <p class="reviewer-info">— Athletic Brewing Company</p>
+                        <p class="reviewer-info">Athletic Brewing Company</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Hired for a pre-launch round before a pretty stressful release. Found a data sync issue we genuinely hadn't seen internally. The report was clear, steps were easy to follow, our dev fixed it same day. Will use again for sure."</p>
-                        <p class="reviewer-info">— James R., Backend Team Lead</p>
+                        <p class="reviewer-info">James R., Backend Team Lead</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"We had users dropping off during checkout and blamed it on pricing. Turns out the promo code field was throwing a silent error on certain browsers and just... doing nothing. No message, nothing. That bug alone was probably costing us real money."</p>
-                        <p class="reviewer-info">— Sophie L., E-Commerce Owner</p>
+                        <p class="reviewer-info">Sophie L., E-Commerce Owner</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Good communication throughout and very thorough. Flagged some UX things I wasn't expecting, like our sign-up form resetting completely on a validation error which is apparently a big drop-off trigger. Fixed it and numbers improved."</p>
-                        <p class="reviewer-info">— David K., Product Manager</p>
+                        <p class="reviewer-info">David K., Product Manager</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="4"></div>
                         <p class="review-text">"Good tester, knows what to look for. Turnaround was a bit slower than expected but the quality of the report made up for it. Found a navigation issue on mobile that we'd missed for months. Would hire again with more lead time."</p>
-                        <p class="reviewer-info">— Nina B., Startup Founder</p>
+                        <p class="reviewer-info">Nina B., Startup Founder</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Honestly didn't expect UX feedback on top of the bug report but it was the most useful part. Pointed out that our main action button wasn't visible on smaller phones without scrolling. Our bounce rate on that screen dropped after the fix."</p>
-                        <p class="reviewer-info">— Tom W., iOS App Developer</p>
+                        <p class="reviewer-info">Tom W., iOS App Developer</p>
                     </div>
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"We kept getting vague user complaints about the app being confusing. The QA review came back with actual usability issues, unclear labels, no feedback after saving, a filter that didn't reset properly. Our designer said it was the most useful feedback doc she'd seen."</p>
-                        <p class="reviewer-info">— Rachel M., Head of Product</p>
+                        <p class="reviewer-info">Rachel M., Head of Product</p>
                     </div>
                 </div>
             </div>
+
+            <div class="reviews-nav">
+                <button class="reviews-btn" id="reviewPrev" aria-label="Previous review">&#8592;</button>
+                <button class="reviews-btn" id="reviewNext" aria-label="Next review">&#8594;</button>
+            </div>
         </div>
     </section>
-
-    <!-- FAQ Section -->
     <section id="faq" class="faq-section">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
@@ -1149,6 +1186,71 @@
         document.querySelectorAll('.stars[data-rating]').forEach(el => {
             el.innerHTML = buildStars(parseFloat(el.dataset.rating));
         });
+
+        // Reviews carousel: manual prev/next + touch swipe
+        (function() {
+            const track = document.querySelector('.reviews-track');
+            const wrapper = document.querySelector('.reviews-marquee-wrapper');
+            if (!track || !wrapper) return;
+
+            const CARD_W = window.innerWidth <= 768 ? 270 + 16 : 340 + 24; // card + gap
+            const HALF = track.scrollWidth / 2; // halfway = one full set
+            let offset = 0;
+            let paused = false;
+            let resumeTimer = null;
+            const SPEED = 0.8; // px per frame comfortable pace
+
+            function tick() {
+                if (!paused) {
+                    offset += SPEED;
+                    if (offset >= HALF) offset -= HALF;
+                    track.style.transform = `translateX(-${offset}px)`;
+                }
+                requestAnimationFrame(tick);
+            }
+
+            // Remove CSS animation now that JS drives it
+            track.style.animation = 'none';
+            track.style.transform = 'translateX(0)';
+            requestAnimationFrame(tick);
+
+            function pauseAndResume(ms) {
+                paused = true;
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(() => { paused = false; }, ms);
+            }
+
+            function snapOffset(dir) {
+                offset = Math.round(offset / CARD_W) * CARD_W + dir * CARD_W;
+                if (offset < 0) offset += HALF;
+                if (offset >= HALF) offset -= HALF;
+                track.style.transform = `translateX(-${offset}px)`;
+                pauseAndResume(3000);
+            }
+
+            document.getElementById('reviewPrev').addEventListener('click', () => snapOffset(-1));
+            document.getElementById('reviewNext').addEventListener('click', () => snapOffset(1));
+
+            // Pause on hover (desktop)
+            wrapper.addEventListener('mouseenter', () => pauseAndResume(99999));
+            wrapper.addEventListener('mouseleave', () => { paused = false; clearTimeout(resumeTimer); });
+
+            // Touch swipe (mobile)
+            let touchStartX = 0;
+            wrapper.addEventListener('touchstart', e => {
+                touchStartX = e.touches[0].clientX;
+                pauseAndResume(99999);
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', e => {
+                const dx = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(dx) > 40) {
+                    snapOffset(dx > 0 ? 1 : -1);
+                } else {
+                    paused = false;
+                }
+            }, { passive: true });
+        })();
 
         // FAQ Accordion functionality
         document.querySelectorAll('.faq-question').forEach(question => {
