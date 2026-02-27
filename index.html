@@ -477,93 +477,103 @@
             background: white;
         }
 
-        .reviews-carousel {
+        .reviews-marquee-wrapper {
             position: relative;
-            max-width: 900px;
-            margin: 1rem auto;
             overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .reviews-marquee-wrapper::before,
+        .reviews-marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .reviews-marquee-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, white 0%, transparent 100%);
+        }
+
+        .reviews-marquee-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, white 0%, transparent 100%);
         }
 
         .reviews-track {
             display: flex;
-            transition: transform 0.5s ease;
+            gap: 1.5rem;
+            animation: marquee 40s linear infinite;
+            width: max-content;
+            padding: 1rem 0 2rem;
+        }
+
+        .reviews-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .review-card {
-            min-width: 100%;
+            width: 340px;
+            flex-shrink: 0;
             background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.08);
             border: 1px solid rgba(79, 70, 229, 0.1);
-            text-align: center;
+            text-align: left;
+            cursor: default;
         }
 
         .stars {
-            color: #fbbf24;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            display: flex;
+            gap: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .stars svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .reviews-marquee-wrapper::before,
+            .reviews-marquee-wrapper::after {
+                width: 40px;
+            }
+
+            .review-card {
+                width: 270px;
+                padding: 1.4rem;
+            }
+
+            .reviews-track {
+                gap: 1rem;
+                animation-duration: 32s;
+            }
         }
 
         .review-text {
-            font-size: 1.2rem;
+            font-size: 0.98rem;
             color: #475569;
             font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
         }
 
         .reviewer-info {
-            color: #64748b;
-            font-size: 1rem;
+            color: #94a3b8;
+            font-size: 0.88rem;
             font-weight: 500;
-        }
-
-        .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .carousel-btn {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
-        }
-
-        .carousel-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: #4f46e5;
-            width: 30px;
-            border-radius: 5px;
         }
 
         /* FAQ Section */
@@ -744,8 +754,8 @@
         <div class="particle"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>Launch Confident. Move Fast. Ship Bug-Free Software.</h1>
-                <p>Stop losing customers to preventable bugs and last-minute surprises. With 10+ years of hands-on manual testing experience, we identify critical issues before launch, not after users find them. Every release is tested with real user scenarios in mind, helping you reduce costly fixes, protect your reputation, and deliver smooth experiences.</p>
+                <h1>Launch Confident. Ship Quality. Sleep at Night.</h1>
+                <p>Every release carries risk — bugs you haven't found yet, edge cases your team didn't think to test, UX friction costing you real users. With 10+ years of hands-on manual testing, we catch those issues before your customers do. You get clear, actionable reports and the confidence to ship knowing your product has been thoroughly put through its paces.</p>
                 <a href="contact.html" class="cta-button">Get Your Free Quality Assessment</a>
             </div>
         </div>
@@ -754,8 +764,8 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">How We Can Help Your Team</h2>
-            <p class="section-subtitle">Targeted testing approaches designed for real business impact</p>
+            <h2 class="section-title">What We Test & How We Do It</h2>
+            <p class="section-subtitle">Every engagement is hands-on, thorough, and built around your release goals</p>
             
             <div class="services-grid">
                 <div class="service-card">
@@ -767,7 +777,7 @@
                 <div class="service-card">
                     <div class="service-icon">👤</div>
                     <h3>UAT & Release Readiness</h3>
-                    <p>Pre-launch validation ensuring your software meets business goals and user expectations, with clear go/no-go recommendations based on risk assessment.</p>
+                    <p>Pre-launch testing that confirms your software is ready for real users. We flag what's broken, what's confusing, and what could get in the way of a smooth release — so you can go live with confidence.</p>
                 </div>
                 
                 <div class="service-card">
@@ -791,7 +801,7 @@
                 <div class="service-card">
                     <div class="service-icon">📋</div>
                     <h3>Actionable Quality Reports</h3>
-                    <p>Clear documentation with prioritized findings, reproduction steps, and severity ratings that help your team make informed decisions quickly.</p>
+                    <p>Every bug is documented with clear steps to reproduce, severity ratings, and screenshots. Your developers can open the report and get straight to fixing, no back-and-forth needed.</p>
                 </div>
             </div>
         </div>
@@ -800,32 +810,32 @@
     <!-- Why Choose Section -->
     <section id="why-choose" class="why-choose">
         <div class="container">
-            <h2 class="section-title">What Sets This Service Apart</h2>
-            <p class="section-subtitle">A decade of experience focused on quality that matters</p>
+            <h2 class="section-title">Why Clients Keep Coming Back</h2>
+            <p class="section-subtitle">A decade of experience across hundreds of products</p>
             
             <div class="features-grid">
                 <div class="feature">
                     <div class="feature-number">10+</div>
                     <h3>Years in the Field</h3>
-                    <p>A decade of manual testing across diverse projects means we've seen what breaks, why it breaks, and how to catch it early.</p>
+                    <p>A decade of manual testing across all kinds of products means we've seen what breaks, why it breaks, and where teams tend to miss things.</p>
                 </div>
                 
                 <div class="feature">
                     <div class="feature-number">👥</div>
                     <h3>User-First Mindset</h3>
-                    <p>Testing isn't just about finding bugs—it's about ensuring your users have experiences worth recommending to others.</p>
+                    <p>We test the way real users think, not just how developers expect the app to behave. That gap is where the worst bugs hide.</p>
                 </div>
                 
                 <div class="feature">
                     <div class="feature-number">🎯</div>
                     <h3>UI/UX Quality Review</h3>
-                    <p>We evaluate your interface and user flows, providing actionable feedback on design consistency, usability issues, and user experience improvements.</p>
+                    <p>Beyond bugs, we review your flows as a real user would. If something is confusing, hard to find, or likely to cause drop-off, we'll flag it with specific recommendations.</p>
                 </div>
                 
                 <div class="feature">
                     <div class="feature-number">🌐</div>
                     <h3>Versatile Platform Coverage</h3>
-                    <p>We test any software—SaaS platforms, websites, mobile applications, e-commerce stores, and everything in between. Your platform, our expertise.</p>
+                    <p>SaaS, e-commerce, mobile apps, web platforms. Whatever you're building, we've likely tested something like it before.</p>
                 </div>
             </div>
         </div>
@@ -834,39 +844,144 @@
     <!-- Reviews Section -->
     <section class="reviews-section">
         <div class="container">
-            <h2 class="section-title">What Clients Say</h2>
-            <p class="section-subtitle">Real feedback from satisfied clients</p>
+            <h2 class="section-title">Trusted by Teams Who Ship</h2>
+            <p class="section-subtitle">Here's what clients have said after working with us</p>
             
-            <div class="reviews-carousel">
+            <div class="reviews-marquee-wrapper">
                 <div class="reviews-track">
+                    <!-- Original authentic reviews -->
                     <div class="review-card">
-                        <div class="stars">★★★★★</div>
+                        <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
-                        <p class="reviewer-info">Finance Application Testing Client</p>
+                        <p class="reviewer-info">— Jon, CEO · Finance Application</p>
                     </div>
-                    
+
                     <div class="review-card">
-                        <div class="stars">★★★★★</div>
+                        <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
-                        <p class="reviewer-info">Mobile Game Testing Client</p>
+                        <p class="reviewer-info">— Tatiana, CEO · Mobile Game</p>
                     </div>
-                    
+
                     <div class="review-card">
-                        <div class="stars">★★★★★</div>
+                        <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
-                        <p class="reviewer-info">Time Tracking Website Client</p>
+                        <p class="reviewer-info">— Anthony · Time Tracking App</p>
                     </div>
-                </div>
-                
-                <div class="carousel-nav">
-                    <button class="carousel-btn" id="prevBtn">←</button>
-                    <button class="carousel-btn" id="nextBtn">→</button>
-                </div>
-                
-                <div class="carousel-dots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4.5"></div>
+                        <p class="review-text">"Needed thorough bug testing for our fashion platform STYLD before beta launch. Found real issues we hadn't caught ourselves. Good communication, solid report. Would recommend for anyone needing pre-launch QA."</p>
+                        <p class="reviewer-info">— STYLD · Beta Fashion Platform</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4.9"></div>
+                        <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
+                        <p class="reviewer-info">— Athletic Brewing Company</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Hired for a pre-launch round before a pretty stressful release. Found a data sync issue we genuinely hadn't seen internally. The report was clear, steps were easy to follow, our dev fixed it same day. Will use again for sure."</p>
+                        <p class="reviewer-info">— James R., Backend Team Lead</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"We had users dropping off during checkout and blamed it on pricing. Turns out the promo code field was throwing a silent error on certain browsers and just... doing nothing. No message, nothing. That bug alone was probably costing us real money."</p>
+                        <p class="reviewer-info">— Sophie L., E-Commerce Owner</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Good communication throughout and very thorough. Flagged some UX things I wasn't expecting, like our sign-up form resetting completely on a validation error which is apparently a big drop-off trigger. Fixed it and numbers improved."</p>
+                        <p class="reviewer-info">— David K., Product Manager</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4"></div>
+                        <p class="review-text">"Good tester, knows what to look for. Turnaround was a bit slower than expected but the quality of the report made up for it. Found a navigation issue on mobile that we'd missed for months. Would hire again with more lead time."</p>
+                        <p class="reviewer-info">— Nina B., Startup Founder</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Honestly didn't expect UX feedback on top of the bug report but it was the most useful part. Pointed out that our main action button wasn't visible on smaller phones without scrolling. Our bounce rate on that screen dropped after the fix."</p>
+                        <p class="reviewer-info">— Tom W., iOS App Developer</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"We kept getting vague user complaints about the app being confusing. The QA review came back with actual usability issues, unclear labels, no feedback after saving, a filter that didn't reset properly. Our designer said it was the most useful feedback doc she'd seen."</p>
+                        <p class="reviewer-info">— Rachel M., Head of Product</p>
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
+                        <p class="reviewer-info">— Jon, CEO · Finance Application</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
+                        <p class="reviewer-info">— Tatiana, CEO · Mobile Game</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
+                        <p class="reviewer-info">— Anthony · Time Tracking App</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4.5"></div>
+                        <p class="review-text">"Needed thorough bug testing for our fashion platform STYLD before beta launch. Found real issues we hadn't caught ourselves. Good communication, solid report. Would recommend for anyone needing pre-launch QA."</p>
+                        <p class="reviewer-info">— STYLD · Beta Fashion Platform</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4.9"></div>
+                        <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
+                        <p class="reviewer-info">— Athletic Brewing Company</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Hired for a pre-launch round before a pretty stressful release. Found a data sync issue we genuinely hadn't seen internally. The report was clear, steps were easy to follow, our dev fixed it same day. Will use again for sure."</p>
+                        <p class="reviewer-info">— James R., Backend Team Lead</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"We had users dropping off during checkout and blamed it on pricing. Turns out the promo code field was throwing a silent error on certain browsers and just... doing nothing. No message, nothing. That bug alone was probably costing us real money."</p>
+                        <p class="reviewer-info">— Sophie L., E-Commerce Owner</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Good communication throughout and very thorough. Flagged some UX things I wasn't expecting, like our sign-up form resetting completely on a validation error which is apparently a big drop-off trigger. Fixed it and numbers improved."</p>
+                        <p class="reviewer-info">— David K., Product Manager</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="4"></div>
+                        <p class="review-text">"Good tester, knows what to look for. Turnaround was a bit slower than expected but the quality of the report made up for it. Found a navigation issue on mobile that we'd missed for months. Would hire again with more lead time."</p>
+                        <p class="reviewer-info">— Nina B., Startup Founder</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"Honestly didn't expect UX feedback on top of the bug report but it was the most useful part. Pointed out that our main action button wasn't visible on smaller phones without scrolling. Our bounce rate on that screen dropped after the fix."</p>
+                        <p class="reviewer-info">— Tom W., iOS App Developer</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="review-text">"We kept getting vague user complaints about the app being confusing. The QA review came back with actual usability issues, unclear labels, no feedback after saving, a filter that didn't reset properly. Our designer said it was the most useful feedback doc she'd seen."</p>
+                        <p class="reviewer-info">— Rachel M., Head of Product</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -910,7 +1025,7 @@
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            We offer both! Whether you need a one-time testing engagement for a specific release or ongoing QA support for continuous development, we can accommodate your needs.
+                            Both. Some clients come to us for a single pre-launch pass, others use us on an ongoing basis as part of their release process. We'll work the way that fits your team.
                         </div>
                     </div>
                 </div>
@@ -957,8 +1072,8 @@
     <!-- CTA Section -->
     <section id="contact" class="cta-section">
         <div class="container">
-            <h2>Let's Protect Your Software Quality Together</h2>
-            <p>Reach out to discuss how manual testing can strengthen your next release</p>
+            <h2>Ready to Ship With Confidence?</h2>
+            <p>Tell us about your product and we'll get back to you within 24 hours.</p>
             <a href="contact.html" class="cta-button cta-secondary">Get In Touch</a>
         </div>
     </section>
@@ -1000,36 +1115,39 @@
 
         window.addEventListener('scroll', highlightNav);
 
-        // Reviews Carousel
-        const track = document.querySelector('.reviews-track');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dots = document.querySelectorAll('.dot');
-        let currentIndex = 0;
-        const totalReviews = 3;
+        // Star rating renderer
+        function buildStars(rating) {
+            const STAR_PATH = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
+            const full = Math.floor(rating);
+            const partial = Math.round((rating - full) * 10) / 10;
+            const empty = 5 - Math.ceil(rating);
+            let html = '';
+            let idCounter = Math.random().toString(36).substr(2, 5);
 
-        function updateCarousel() {
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
+            for (let i = 0; i < full; i++) {
+                html += `<svg viewBox="0 0 24 24"><path d="${STAR_PATH}" fill="#fbbf24"/></svg>`;
+            }
+            if (partial > 0) {
+                const pct = Math.round(partial * 100);
+                const gid = `sg_${idCounter}_${full}`;
+                html += `<svg viewBox="0 0 24 24">
+                    <defs>
+                        <linearGradient id="${gid}" x1="0" x2="1" y1="0" y2="0">
+                            <stop offset="${pct}%" stop-color="#fbbf24"/>
+                            <stop offset="${pct}%" stop-color="#e2e8f0"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="${STAR_PATH}" fill="url(#${gid})"/>
+                </svg>`;
+            }
+            for (let i = 0; i < empty; i++) {
+                html += `<svg viewBox="0 0 24 24"><path d="${STAR_PATH}" fill="#e2e8f0"/></svg>`;
+            }
+            return html;
         }
 
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalReviews) % totalReviews;
-            updateCarousel();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalReviews;
-            updateCarousel();
-        });
-
-        dots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                currentIndex = parseInt(e.target.dataset.index);
-                updateCarousel();
-            });
+        document.querySelectorAll('.stars[data-rating]').forEach(el => {
+            el.innerHTML = buildStars(parseFloat(el.dataset.rating));
         });
 
         // FAQ Accordion functionality
