@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expert Manual QA Testing Services</title>
+    <title>ProLevel QA — Expert Manual QA & Software Testing Services</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Manual QA testing that catches what automation misses. Bug reports your developers can act on immediately. Fixed-price testing packages from $299. 10+ years of hands-on experience.">
+    <link rel="canonical" href="https://prolevelqa.com/">
+
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prolevelqa.com/">
+    <meta property="og:site_name" content="ProLevel QA">
+    <meta property="og:title" content="ProLevel QA — Expert Manual QA & Software Testing">
+    <meta property="og:description" content="Manual QA testing that catches what automation misses. Fixed-price packages from $299, with bug reports your developers can act on immediately.">
+    <meta property="og:image" content="https://prolevelqa.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ProLevel QA — Expert Manual QA & Software Testing">
+    <meta name="twitter:description" content="Manual QA testing that catches what automation misses. Fixed-price packages from $299.">
+    <meta name="twitter:image" content="https://prolevelqa.com/og-image.png">
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234f46e5'/><stop offset='50%' style='stop-color:%237c3aed'/><stop offset='100%' style='stop-color:%2306b6d4'/></linearGradient></defs><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='60' font-weight='bold' fill='url(%23g)'>PQ</text></svg>">
     <style>
         * {
@@ -16,7 +36,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #1a1a2e;
-            overflow-x: hidden;
             background: #ffffff;
         }
 
@@ -38,11 +57,13 @@
             border-bottom: 1px solid rgba(79, 70, 229, 0.1);
         }
 
-        nav {
+        /* nav also carries .container, whose padding would win on specificity —
+           so this rule must be at least as specific or the header collapses. */
+        nav.container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 0;
+            padding: 1.25rem 20px;
         }
 
         .logo {
@@ -53,20 +74,23 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             position: relative;
+            padding-left: 30px;
         }
 
         .logo::before {
             content: '✦';
             position: absolute;
-            left: -30px;
+            left: 0;
             color: #4f46e5;
             font-size: 1.2rem;
+            -webkit-text-fill-color: #4f46e5;
         }
 
         .nav-links {
             display: flex;
             gap: 2.5rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -89,24 +113,66 @@
             transition: width 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
             color: #9333ea;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a:focus-visible::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        .nav-links a.active::after {
-            width: 100%;
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #4f46e5;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Focus visibility for keyboard users */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #06b6d4;
+            outline-offset: 3px;
+            border-radius: 4px;
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
             color: white;
-            padding: 180px 0 120px;
-            margin-top: 80px;
+            padding: 140px 0 120px;
             position: relative;
             overflow: hidden;
         }
@@ -114,11 +180,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
+            inset: 0;
+            background:
                 radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
             opacity: 0.6;
@@ -134,7 +197,6 @@
             background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1));
         }
 
-        /* Floating particles effect */
         .hero .particle {
             position: absolute;
             background: rgba(255, 255, 255, 0.1);
@@ -142,29 +204,9 @@
             animation: float 20s infinite;
         }
 
-        .hero .particle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .hero .particle:nth-child(2) {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            right: 15%;
-            animation-delay: 5s;
-        }
-
-        .hero .particle:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            bottom: 20%;
-            left: 70%;
-            animation-delay: 10s;
-        }
+        .hero .particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .hero .particle:nth-child(2) { width: 60px; height: 60px; top: 60%; right: 15%; animation-delay: 5s; }
+        .hero .particle:nth-child(3) { width: 100px; height: 100px; bottom: 20%; left: 70%; animation-delay: 10s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -174,8 +216,50 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+            max-width: 820px;
         }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-trust {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.75rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .hero-trust span { display: flex; align-items: center; gap: 0.5rem; }
+        .hero-trust span::before { content: '✓'; font-weight: 700; color: #ffffff; }
+
+        .hero-proof {
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .hero-proof a {
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 2px;
+            transition: border-color 0.3s;
+        }
+
+        .hero-proof a:hover { border-color: #ffffff; }
 
         .hero h1 {
             font-size: 3.8rem;
@@ -191,6 +275,13 @@
             opacity: 0.95;
             line-height: 1.8;
             text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .cta-button {
@@ -231,6 +322,23 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.25), 0 10px 25px rgba(79, 70, 229, 0.4);
         }
 
+        .cta-ghost {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+
+        .cta-ghost:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+
         /* Services Section */
         .services {
             padding: 60px 0 120px;
@@ -248,7 +356,12 @@
             background: linear-gradient(90deg, transparent, #4f46e5, #06b6d4, transparent);
         }
 
+        .section-head {
+            text-align: center;
+        }
+
         .section-title {
+            display: inline-block;
             text-align: center;
             font-size: 2.8rem;
             font-weight: 700;
@@ -258,9 +371,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .section-title::after {
@@ -288,13 +398,6 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
         }
-        
-        @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
 
         .service-card {
             background: white;
@@ -320,9 +423,7 @@
             transition: transform 0.4s;
         }
 
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
+        .service-card:hover::before { transform: scaleX(1); }
 
         .service-card:hover {
             transform: translateY(-15px);
@@ -370,16 +471,7 @@
             position: relative;
         }
 
-        .why-choose .section-title {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .why-choose .section-subtitle {
-            color: #94a3b8;
-        }
+        .why-choose .section-subtitle { color: #94a3b8; }
 
         .features-grid {
             display: grid;
@@ -393,9 +485,7 @@
             transition: transform 0.3s;
         }
 
-        .feature:hover {
-            transform: translateY(-10px);
-        }
+        .feature:hover { transform: translateY(-10px); }
 
         .feature-number {
             width: 90px;
@@ -417,10 +507,7 @@
         .feature-number::before {
             content: '';
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
+            inset: -5px;
             border-radius: 50%;
             border: 2px solid rgba(6, 182, 212, 0.3);
             animation: pulse 2s infinite;
@@ -448,6 +535,186 @@
             line-height: 1.7;
         }
 
+        /* ===== Pricing Section ===== */
+        .pricing {
+            padding: 100px 0 110px;
+            background: linear-gradient(180deg, #ffffff 0%, #eef2ff 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .price-card {
+            background: white;
+            border: 1px solid rgba(79, 70, 229, 0.15);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 55px rgba(79, 70, 229, 0.15);
+        }
+
+        .price-card.featured {
+            border: 2px solid #7c3aed;
+            box-shadow: 0 18px 55px rgba(124, 58, 237, 0.18);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+
+        .price-name {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.35rem;
+        }
+
+        .price-for {
+            color: #64748b;
+            font-size: 0.98rem;
+            min-height: 4.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .price-amount {
+            font-size: 2.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 60%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .price-note {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .price-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.8rem;
+            color: #475569;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        .price-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #06b6d4;
+            font-weight: 700;
+        }
+
+        .price-cta {
+            display: block;
+            text-align: center;
+            padding: 0.95rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #4f46e5;
+            color: #4f46e5;
+            transition: all 0.3s;
+        }
+
+        .price-cta:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .price-card.featured .price-cta {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-color: transparent;
+            color: white;
+        }
+
+        .price-card.featured .price-cta:hover {
+            box-shadow: 0 10px 26px rgba(79, 70, 229, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .pricing-extra {
+            margin-top: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .extra-card {
+            background: #ffffff;
+            border: 1px solid rgba(79, 70, 229, 0.15);
+            border-left: 4px solid #7c3aed;
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.06);
+        }
+
+        .extra-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .extra-card p {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .extra-card a {
+            color: #4f46e5;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.4);
+            transition: border-color 0.2s;
+        }
+
+        .extra-card a:hover { border-color: #4f46e5; }
+
+        .pricing-fineprint {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            line-height: 1.8;
+        }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
@@ -461,14 +728,42 @@
         .cta-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
+            inset: 0;
+            background:
                 radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
                 radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
             opacity: 0.6;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 3px solid white;
+            color: white;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #4f46e5;
+            border-color: white;
         }
 
         /* Reviews Section */
@@ -507,18 +802,9 @@
         .reviews-track {
             display: flex;
             gap: 1.5rem;
-            animation: marquee 65s linear infinite;
             width: max-content;
             padding: 1rem 0 2rem;
-        }
-
-        .reviews-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            will-change: transform;
         }
 
         .review-card {
@@ -575,31 +861,11 @@
             box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
         }
 
-        .reviews-btn:active {
-            transform: scale(0.95);
-        }
-
-        @media (max-width: 768px) {
-            .reviews-marquee-wrapper::before,
-            .reviews-marquee-wrapper::after {
-                width: 40px;
-            }
-
-            .review-card {
-                width: 270px;
-                padding: 1.4rem;
-            }
-
-            .reviews-track {
-                gap: 1rem;
-                animation-duration: 52s;
-            }
-        }
+        .reviews-btn:active { transform: scale(0.95); }
 
         .review-text {
             font-size: 0.98rem;
             color: #475569;
-            font-style: normal;
             margin-bottom: 1.2rem;
             line-height: 1.7;
         }
@@ -631,35 +897,35 @@
             transition: all 0.3s;
         }
 
-        .faq-item:hover {
-            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.12);
-        }
+        .faq-item:hover { box-shadow: 0 8px 30px rgba(79, 70, 229, 0.12); }
 
         .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            font-family: inherit;
+            text-align: left;
             padding: 1.5rem 2rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
             font-weight: 600;
             font-size: 1.1rem;
             color: #1e293b;
-            user-select: none;
         }
 
-        .faq-question:hover {
-            background: #fafbfc;
-        }
+        .faq-question:hover { background: #fafbfc; }
 
         .faq-icon {
             font-size: 1.5rem;
             color: #4f46e5;
             transition: transform 0.3s;
+            flex-shrink: 0;
         }
 
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
+        .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
 
         .faq-answer {
             max-height: 0;
@@ -672,41 +938,6 @@
             color: #64748b;
             line-height: 1.8;
             font-size: 1.05rem;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-
-        .cta-section h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-            font-weight: 700;
-        }
-
-        .cta-section p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-secondary {
-            background: transparent;
-            border: 3px solid white;
-            color: white;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cta-secondary:hover {
-            background: white;
-            color: #4f46e5;
-            border-color: white;
         }
 
         /* Footer */
@@ -733,37 +964,76 @@
             font-size: 1.05rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+        footer a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+        footer a:hover { color: #06b6d4; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .nav-toggle { display: flex; }
 
             .nav-links {
-                gap: 0.6rem;
-                font-size: 0.9rem;
-            }
-            
-            .nav-links a {
-                padding: 0.25rem 0;
-                white-space: nowrap;
-            }
-            
-            .logo {
-                font-size: 1.1rem;
-            }
-            
-            .logo::before {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 0.5rem 20px 1rem;
+                box-shadow: 0 12px 30px rgba(79, 70, 229, 0.12);
+                border-bottom: 1px solid rgba(79, 70, 229, 0.1);
                 display: none;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .nav-links.open { display: flex; }
+
+            .nav-links li { width: 100%; }
+
+            .nav-links a {
+                display: block;
+                padding: 0.9rem 0;
+                border-bottom: 1px solid rgba(79, 70, 229, 0.08);
             }
 
-            .service-card {
-                padding: 2rem;
-            }
+            .nav-links a::after { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 110px 0 80px; }
+            .hero h1 { font-size: 2.1rem; }
+            .hero p { font-size: 1.05rem; }
+            .hero-eyebrow { font-size: 0.78rem; padding: 0.45rem 0.9rem; letter-spacing: 0.05em; }
+            .hero-trust { flex-direction: column; gap: 0.5rem; font-size: 0.95rem; margin-top: 1.5rem; }
+            .hero-proof { font-size: 1rem; }
+            .cta-button, .cta-ghost { width: 100%; text-align: center; padding-left: 1.5rem; padding-right: 1.5rem; }
+            .section-title { font-size: 1.9rem; }
+            .section-subtitle { font-size: 1.05rem; margin-bottom: 3rem; }
+            .services { padding: 50px 0 80px; }
+            .services-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .service-card { padding: 2rem; }
+            .why-choose { padding: 80px 0; }
+            .features-grid { margin-top: 3rem; }
+            .pricing { padding: 70px 0 80px; }
+            .cta-section h2 { font-size: 1.9rem; }
+            .cta-section p { font-size: 1.1rem; }
+            .extra-card { padding: 1.5rem 1.4rem; }
+            .faq-question { padding: 1.2rem 1.4rem; font-size: 1rem; }
+            .faq-answer-content { padding: 0 1.4rem 1.2rem; font-size: 1rem; }
+
+            .reviews-marquee-wrapper::before,
+            .reviews-marquee-wrapper::after { width: 40px; }
+
+            .review-card { width: 270px; padding: 1.4rem; }
+            .reviews-track { gap: 1rem; }
         }
     </style>
 </head>
@@ -772,9 +1042,13 @@
     <header>
         <nav class="container">
             <div class="logo">ProLevel QA</div>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="about.html">About</a></li>
                 <li><a href="bug_demo.html">Portfolio</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
@@ -788,9 +1062,20 @@
         <div class="particle"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>Launch Confident. Ship Quality. Sleep at Night.</h1>
-                <p>Every release carries risk bugs you haven't found yet, edge cases your team didn't think to test, UX friction costing you real users. With 10+ years of hands-on manual testing, we catch those issues before your customers do. You get clear, actionable reports and the confidence to ship knowing your product has been thoroughly put through its paces.</p>
-                <a href="contact.html" class="cta-button">Get Your Free Quality Assessment</a>
+                <span class="hero-eyebrow">Manual QA Testing for Websites &amp; Apps</span>
+                <h1>Manual Testing That Catches What Automation Misses</h1>
+                <p>Every release carries risk — bugs you haven't found yet, edge cases your team didn't think to test, UX friction costing you real users. With 10+ years of hands-on manual testing, we catch those issues before your customers do. You get clear, actionable reports and the confidence to ship.</p>
+                <div class="hero-actions">
+                    <a href="#pricing" class="cta-button">See Testing Packages</a>
+                    <a href="contact.html" class="cta-ghost">Get a Custom Quote</a>
+                </div>
+                <p class="hero-proof"><a href="bug_demo.html">See our work →</a></p>
+                <div class="hero-trust">
+                    <span>Fixed prices from $349</span>
+                    <span>Delivered in 3 days</span>
+                    <span>Price agreed before we start</span>
+                    <span>No sales call required</span>
+                </div>
             </div>
         </div>
     </section>
@@ -798,42 +1083,44 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">What We Test & How We Do It</h2>
+            <div class="section-head">
+                <h2 class="section-title">What We Test &amp; How We Do It</h2>
+            </div>
             <p class="section-subtitle">Every engagement is hands-on, thorough, and built around your release goals</p>
-            
+
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">✓</div>
+                    <div class="service-icon" aria-hidden="true">✓</div>
                     <h3>End-to-End Feature Validation</h3>
                     <p>Complete workflow testing that mirrors how real users interact with your product, catching integration issues and edge cases before they reach production.</p>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">👤</div>
-                    <h3>UAT & Release Readiness</h3>
+                    <div class="service-icon" aria-hidden="true">👤</div>
+                    <h3>UAT &amp; Release Readiness</h3>
                     <p>Pre-launch testing that confirms your software is ready for real users. We flag what's broken, what's confusing, and what could get in the way of a smooth release so you can go live with confidence.</p>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">🔍</div>
+                    <div class="service-icon" aria-hidden="true">🔍</div>
                     <h3>Strategic Exploratory Testing</h3>
                     <p>Creative, scenario-based testing that uncovers unexpected behaviors and usability concerns automation can't detect, protecting your reputation.</p>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">💻</div>
+                    <div class="service-icon" aria-hidden="true">💻</div>
                     <h3>Multi-Platform Verification</h3>
                     <p>Testing across browsers, devices, and screen sizes to guarantee your users get a consistent, quality experience regardless of how they access your product. iOS and Android mobile testing included.</p>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">🔄</div>
+                    <div class="service-icon" aria-hidden="true">🔄</div>
                     <h3>Change Impact Analysis</h3>
                     <p>Systematic regression checks after each update to verify new features work while existing functionality remains stable and reliable.</p>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">📋</div>
+                    <div class="service-icon" aria-hidden="true">📋</div>
                     <h3>Actionable Quality Reports</h3>
                     <p>Every bug is documented with clear steps to reproduce, severity ratings, and screenshots. Your developers can open the report and get straight to fixing, no back-and-forth needed.</p>
                 </div>
@@ -844,30 +1131,32 @@
     <!-- Why Choose Section -->
     <section id="why-choose" class="why-choose">
         <div class="container">
-            <h2 class="section-title">Why Clients Keep Coming Back</h2>
+            <div class="section-head">
+                <h2 class="section-title">Why Clients Keep Coming Back</h2>
+            </div>
             <p class="section-subtitle">A decade of experience across hundreds of products</p>
-            
+
             <div class="features-grid">
                 <div class="feature">
                     <div class="feature-number">10+</div>
                     <h3>Years in the Field</h3>
                     <p>A decade of manual testing across all kinds of products means we've seen what breaks, why it breaks, and where teams tend to miss things.</p>
                 </div>
-                
+
                 <div class="feature">
-                    <div class="feature-number">👥</div>
+                    <div class="feature-number" aria-hidden="true">👥</div>
                     <h3>User-First Mindset</h3>
                     <p>We test the way real users think, not just how developers expect the app to behave. That gap is where the worst bugs hide.</p>
                 </div>
-                
+
                 <div class="feature">
-                    <div class="feature-number">🎯</div>
+                    <div class="feature-number" aria-hidden="true">🎯</div>
                     <h3>UI/UX Quality Review</h3>
                     <p>Beyond bugs, we review your flows as a real user would. If something is confusing, hard to find, or likely to cause drop-off, we'll flag it with specific recommendations.</p>
                 </div>
-                
+
                 <div class="feature">
-                    <div class="feature-number">🌐</div>
+                    <div class="feature-number" aria-hidden="true">🌐</div>
                     <h3>Versatile Platform Coverage</h3>
                     <p>SaaS, e-commerce, mobile apps, web platforms. Whatever you're building, we've likely tested something like it before.</p>
                 </div>
@@ -875,15 +1164,97 @@
         </div>
     </section>
 
+    <!-- ===== Pricing Section ===== -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Testing Packages</h2>
+            </div>
+            <p class="section-subtitle">Fixed prices and defined scope. You know the cost and exactly what's included before any work begins.</p>
+
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="price-card">
+                    <div class="price-name">Basic</div>
+                    <p class="price-for">A single page, or one complete process such as registration, checkout, or booking</p>
+                    <div class="price-amount">$349</div>
+                    <p class="price-note">Delivered in 3 days</p>
+                    <ul class="price-list">
+                        <li>Tested in Chrome, on desktop and mobile</li>
+                        <li>Functionality, layout, and usability reviewed</li>
+                        <li>Written report of every issue found, with screenshots</li>
+                        <li>Video walkthrough of the key issues</li>
+                        <li>One free retest after your fixes</li>
+                    </ul>
+                    <a href="contact.html?package=basic" class="price-cta">Book Basic</a>
+                </div>
+
+                <!-- Standard -->
+                <div class="price-card featured">
+                    <div class="price-badge">Most Popular</div>
+                    <div class="price-name">Standard</div>
+                    <p class="price-for">A complete website or application, including every page and every action a customer can take</p>
+                    <div class="price-amount">$749</div>
+                    <p class="price-note">Delivered in 7 days</p>
+                    <ul class="price-list">
+                        <li>Tested in Chrome, Safari, and Firefox, on desktop, tablet, and mobile</li>
+                        <li>Every page and every customer-facing action reviewed</li>
+                        <li>Includes edge cases and unexpected user behaviour</li>
+                        <li>Written report, each issue rated critical, major, or minor</li>
+                        <li>Video walkthrough of the key issues</li>
+                        <li>One free retest after your fixes</li>
+                    </ul>
+                    <a href="contact.html?package=standard" class="price-cta">Book Standard</a>
+                </div>
+
+                <!-- Complete -->
+                <div class="price-card">
+                    <div class="price-name">Complete</div>
+                    <p class="price-for">A large website or application with user accounts, payments, or multiple types of user</p>
+                    <div class="price-amount">$1,399</div>
+                    <p class="price-note">Delivered in 14 days</p>
+                    <ul class="price-list">
+                        <li>Tested in Chrome, Safari, and Firefox, on desktop, tablet, and mobile</li>
+                        <li>Every customer-facing action tested from start to finish</li>
+                        <li>Registration, login, payment, and checkout tested in depth</li>
+                        <li>Each account type tested separately, such as customer and administrator</li>
+                        <li>Written report, each issue rated critical, major, or minor</li>
+                        <li>A reusable checklist so you can retest after future updates</li>
+                        <li>One free retest after your fixes</li>
+                    </ul>
+                    <a href="contact.html?package=complete" class="price-cta">Book Complete</a>
+                </div>
+            </div>
+
+            <div class="pricing-extra">
+                <div class="extra-card">
+                    <h3>Need something different?</h3>
+                    <p>Not every project fits a standard package. Send us the details and we'll define the scope and quote a fixed price before any work begins. <a href="contact.html?package=custom">Tell us about your project</a>.</p>
+                </div>
+
+                <div class="extra-card">
+                    <h3>Ongoing monthly testing</h3>
+                    <p>For teams that release regularly. We test each update as it ships — $1,199 per month, with a tester who already knows your product. <a href="contact.html?package=monthly">Ask about monthly testing</a>.</p>
+                </div>
+            </div>
+
+            <p class="pricing-fineprint">
+                Every package includes one round of retesting after your fixes.<br>
+                Work beyond the stated scope is quoted separately before it starts — you'll never get a surprise invoice.
+            </p>
+        </div>
+    </section>
+
     <!-- Reviews Section -->
     <section class="reviews-section">
         <div class="container">
-            <h2 class="section-title">Trusted by Teams Who Ship</h2>
+            <div class="section-head">
+                <h2 class="section-title">Trusted by Teams Who Ship</h2>
+            </div>
             <p class="section-subtitle">Here's what clients have said after working with us</p>
-            
+
             <div class="reviews-marquee-wrapper">
-                <div class="reviews-track">
-                    <!-- Original authentic reviews -->
+                <div class="reviews-track" id="reviewsTrack">
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
                         <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
@@ -902,72 +1273,15 @@
                         <p class="reviewer-info">Anthony · Time Tracking App</p>
                     </div>
 
-                    <div class="review-card">
-                        <div class="stars" data-rating="4.5"></div>
-                        <p class="review-text">"Needed thorough bug testing for our fashion platform STYLD before beta launch. Found real issues we hadn't caught ourselves. Good communication, solid report. Would recommend for anyone needing pre-launch QA."</p>
-                        <p class="reviewer-info">STYLD · Beta Fashion Platform</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="4.9"></div>
-                        <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
-                        <p class="reviewer-info">Athletic Brewing Company</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Hired for a pre-launch round before a pretty stressful release. Found a data sync issue we genuinely hadn't seen internally. The report was clear, steps were easy to follow, our dev fixed it same day. Will use again for sure."</p>
-                        <p class="reviewer-info">James R., Backend Team Lead</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"We had users dropping off during checkout and blamed it on pricing. Turns out the promo code field was throwing a silent error on certain browsers and just... doing nothing. No message, nothing. That bug alone was probably costing us real money."</p>
-                        <p class="reviewer-info">Sophie L., E-Commerce Owner</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Good communication throughout and very thorough. Flagged some UX things I wasn't expecting, like our sign-up form resetting completely on a validation error which is apparently a big drop-off trigger. Fixed it and numbers improved."</p>
-                        <p class="reviewer-info">David K., Product Manager</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="4"></div>
-                        <p class="review-text">"Good tester, knows what to look for. Turnaround was a bit slower than expected but the quality of the report made up for it. Found a navigation issue on mobile that we'd missed for months. Would hire again with more lead time."</p>
-                        <p class="reviewer-info">Nina B., Startup Founder</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Honestly didn't expect UX feedback on top of the bug report but it was the most useful part. Pointed out that our main action button wasn't visible on smaller phones without scrolling. Our bounce rate on that screen dropped after the fix."</p>
-                        <p class="reviewer-info">Tom W., iOS App Developer</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"We kept getting vague user complaints about the app being confusing. The QA review came back with actual usability issues, unclear labels, no feedback after saving, a filter that didn't reset properly. Our designer said it was the most useful feedback doc she'd seen."</p>
-                        <p class="reviewer-info">Rachel M., Head of Product</p>
-                    </div>
-
-                    <!-- Duplicate set for seamless loop -->
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Excellent performance. Hard worker. Great to work with."</p>
-                        <p class="reviewer-info">Jon, CEO · Finance Application</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Outstanding professional! I'm always happy with the results :)"</p>
-                        <p class="reviewer-info">Tatiana, CEO · Mobile Game</p>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="review-text">"Great attention to detail and thorough testing coverage."</p>
-                        <p class="reviewer-info">Anthony · Time Tracking App</p>
-                    </div>
+                    <!--
+                    ============================================================
+                    HELD BACK PENDING CONFIRMATION — the two reviews below name
+                    real, identifiable companies (STYLD and Athletic Brewing).
+                    If they are genuine clients who are fine being named,
+                    delete this comment opener and the closer below to restore
+                    them. If not, leave them out — a false endorsement from a
+                    named company is a legal risk, not just a marketing one.
+                    ============================================================
 
                     <div class="review-card">
                         <div class="stars" data-rating="4.5"></div>
@@ -980,6 +1294,9 @@
                         <p class="review-text">"Really happy with the work done for Athletic Brewing. Thorough, professional, and the issues found were clearly documented. Made our team's job a lot easier."</p>
                         <p class="reviewer-info">Athletic Brewing Company</p>
                     </div>
+
+                    ============================ END HELD BACK ================
+                    -->
 
                     <div class="review-card">
                         <div class="stars" data-rating="5"></div>
@@ -1025,42 +1342,58 @@
             </div>
         </div>
     </section>
+
+    <!-- FAQ -->
     <section id="faq" class="faq-section">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="section-head">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
             <p class="section-subtitle">Everything you need to know about our testing services</p>
-            
+
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
                         <span>How does pricing work?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
                         <div class="faq-answer-content">
-                            We offer custom pricing tailored to your project needs, starting at $45/hour. Contact us for a detailed quote based on your specific requirements.
+                            Most projects fit one of our three fixed-price packages — Basic ($349), Standard ($749), or Complete ($1,399) — so you know the cost before we start. Larger or unusual projects get a custom quote, and teams that ship regularly can book ongoing testing on a monthly basis. Every package includes one round of retesting after your fixes.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">
+                        <span>What if my project doesn't fit one of the packages?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a8" role="region" aria-labelledby="faq-q8">
+                        <div class="faq-answer-content">
+                            Send us a link to your site or application along with your main concerns. We'll come back with a proposed scope, a timeline, and a fixed price before any work begins.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
                         <span>How long does testing take?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
                         <div class="faq-answer-content">
-                            Simple testing projects can be completed in 24-48 hours. The exact timeline depends on the complexity and scope of work. We'll provide a clear estimate after reviewing your project requirements.
+                            Basic packages are delivered in 3 days, Standard in 7, and Complete in 14. Urgent work can often be accommodated — ask when you get in touch.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
                         <span>Do you offer one-time projects or ongoing testing?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
                         <div class="faq-answer-content">
                             Both. Some clients come to us for a single pre-launch pass, others use us on an ongoing basis as part of their release process. We'll work the way that fits your team.
                         </div>
@@ -1068,23 +1401,35 @@
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you provide test documentation?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                        <span>Do you work with agencies on a white-label basis?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
                         <div class="faq-answer-content">
-                            Yes! We provide comprehensive test summaries, screenshots, videos, and detailed bug reports—everything you need to clearly understand the issues, their impact, and steps to reproduce them.
+                            Yes. We work behind the scenes for development and design agencies, delivering reports under your brand so testing looks like part of your own service. Partner rates apply for ongoing volume — get in touch to discuss.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can you integrate with our development workflow?</span>
-                        <span class="faq-icon">+</span>
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                        <span>Do you provide test documentation?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
+                        <div class="faq-answer-content">
+                            Yes. We provide comprehensive test summaries, screenshots, videos, and detailed bug reports — everything you need to clearly understand the issues, their impact, and steps to reproduce them.
+                        </div>
                     </div>
-                    <div class="faq-answer">
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+                        <span>Can you integrate with our development workflow?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
                         <div class="faq-answer-content">
                             Yes, we can work with your existing tools and processes. Please note that we may not always be available at the same time as your development team due to timezone differences, but we ensure clear communication and timely updates.
                         </div>
@@ -1092,11 +1437,11 @@
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">
                         <span>Do you test on real devices?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-a7" role="region" aria-labelledby="faq-q7">
                         <div class="faq-answer-content">
                             Yes, we test on real physical devices to ensure accurate results. We can also use virtual environments for specific devices, browsers, or configurations upon request.
                         </div>
@@ -1119,55 +1464,103 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
-            <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="privacy.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#06b6d4'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Privacy Policy</a></p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="privacy.html">Privacy Policy</a></p>
         </div>
     </footer>
 
     <script>
-        // Scroll-based navigation highlighting
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        // ---- Mobile navigation ----
+        (function () {
+            const toggle = document.getElementById('navToggle');
+            const links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
 
-        function highlightNav() {
-            let scrollY = window.pageYOffset;
+            function setOpen(open) {
+                links.classList.toggle('open', open);
+                toggle.setAttribute('aria-expanded', String(open));
+                toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            }
 
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 150;
-                const sectionId = section.getAttribute('id');
-                
-                // Skip highlighting for contact section
-                if (sectionId === 'contact') return;
-                
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
+            toggle.addEventListener('click', () => {
+                setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+            });
+
+            // Close after tapping a link
+            links.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') setOpen(false);
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+                    setOpen(false);
+                    toggle.focus();
                 }
             });
-        }
 
-        window.addEventListener('scroll', highlightNav);
+            // Reset when returning to desktop width
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 860) setOpen(false);
+            });
+        })();
 
-        // Star rating renderer
+        // ---- Offset anchor scrolling so the fixed header doesn't cover headings ----
+        (function () {
+            const header = document.querySelector('header');
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const id = link.getAttribute('href').slice(1);
+                    const target = document.getElementById(id);
+                    if (!target) return;
+                    e.preventDefault();
+                    const offset = (header ? header.offsetHeight : 0) + 16;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                    // Sandboxed previews can block history access — never let it break the scroll
+                    try { history.replaceState(null, '', '#' + id); } catch (err) { /* ignore */ }
+                });
+            });
+        })();
+
+        // ---- Highlight in-page nav links while scrolling ----
+        (function () {
+            const anchorLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+            if (!anchorLinks.length) return;
+
+            const watched = anchorLinks
+                .map(link => ({ link, section: document.getElementById(link.getAttribute('href').slice(1)) }))
+                .filter(entry => entry.section);
+
+            function highlight() {
+                const y = window.pageYOffset + 200;
+                let current = null;
+                watched.forEach(entry => {
+                    if (y >= entry.section.offsetTop) current = entry.link;
+                });
+                anchorLinks.forEach(l => l.classList.remove('active'));
+                if (current) current.classList.add('active');
+            }
+
+            window.addEventListener('scroll', highlight, { passive: true });
+            highlight();
+        })();
+
+        // ---- Star rating renderer ----
         function buildStars(rating) {
             const STAR_PATH = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
             const full = Math.floor(rating);
             const partial = Math.round((rating - full) * 10) / 10;
             const empty = 5 - Math.ceil(rating);
+            const uid = Math.random().toString(36).slice(2, 7);
             let html = '';
-            let idCounter = Math.random().toString(36).substr(2, 5);
 
             for (let i = 0; i < full; i++) {
-                html += `<svg viewBox="0 0 24 24"><path d="${STAR_PATH}" fill="#fbbf24"/></svg>`;
+                html += `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${STAR_PATH}" fill="#fbbf24"/></svg>`;
             }
             if (partial > 0) {
                 const pct = Math.round(partial * 100);
-                const gid = `sg_${idCounter}_${full}`;
-                html += `<svg viewBox="0 0 24 24">
+                const gid = `sg_${uid}_${full}`;
+                html += `<svg viewBox="0 0 24 24" aria-hidden="true">
                     <defs>
                         <linearGradient id="${gid}" x1="0" x2="1" y1="0" y2="0">
                             <stop offset="${pct}%" stop-color="#fbbf24"/>
@@ -1178,64 +1571,94 @@
                 </svg>`;
             }
             for (let i = 0; i < empty; i++) {
-                html += `<svg viewBox="0 0 24 24"><path d="${STAR_PATH}" fill="#e2e8f0"/></svg>`;
+                html += `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${STAR_PATH}" fill="#e2e8f0"/></svg>`;
             }
             return html;
         }
 
-        document.querySelectorAll('.stars[data-rating]').forEach(el => {
-            el.innerHTML = buildStars(parseFloat(el.dataset.rating));
-        });
-
-        // Reviews carousel: manual prev/next + touch swipe
-        (function() {
-            const track = document.querySelector('.reviews-track');
+        // ---- Reviews carousel ----
+        (function () {
+            const track = document.getElementById('reviewsTrack');
             const wrapper = document.querySelector('.reviews-marquee-wrapper');
             if (!track || !wrapper) return;
 
-            const CARD_W = window.innerWidth <= 768 ? 270 + 16 : 340 + 24; // card + gap
-            const HALF = track.scrollWidth / 2; // halfway = one full set
+            // Duplicate the set once, in JS, so the loop is seamless without
+            // repeating the markup (and without screen readers reading it twice).
+            const originals = Array.from(track.children);
+            originals.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
+
+            // Render stars after cloning so every card gets unique gradient ids
+            track.querySelectorAll('.stars[data-rating]').forEach(el => {
+                el.innerHTML = buildStars(parseFloat(el.dataset.rating));
+            });
+
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            let cardWidth = 0;
+            let half = 0;
             let offset = 0;
-            let paused = false;
+            let paused = reduceMotion;
             let resumeTimer = null;
-            const SPEED = 0.8; // px per frame comfortable pace
+            const SPEED = 0.8;
+
+            function measure() {
+                const first = track.querySelector('.review-card');
+                if (!first) return;
+                const gap = parseFloat(getComputedStyle(track).gap) || 0;
+                cardWidth = first.getBoundingClientRect().width + gap;
+                half = track.scrollWidth / 2;
+                if (half > 0) offset = offset % half;
+            }
 
             function tick() {
-                if (!paused) {
+                if (!paused && half > 0) {
                     offset += SPEED;
-                    if (offset >= HALF) offset -= HALF;
+                    if (offset >= half) offset -= half;
                     track.style.transform = `translateX(-${offset}px)`;
                 }
                 requestAnimationFrame(tick);
             }
 
-            // Remove CSS animation now that JS drives it
-            track.style.animation = 'none';
-            track.style.transform = 'translateX(0)';
-            requestAnimationFrame(tick);
-
             function pauseAndResume(ms) {
                 paused = true;
                 clearTimeout(resumeTimer);
-                resumeTimer = setTimeout(() => { paused = false; }, ms);
+                resumeTimer = setTimeout(() => { paused = reduceMotion; }, ms);
             }
 
-            function snapOffset(dir) {
-                offset = Math.round(offset / CARD_W) * CARD_W + dir * CARD_W;
-                if (offset < 0) offset += HALF;
-                if (offset >= HALF) offset -= HALF;
+            function step(dir) {
+                if (!cardWidth || !half) measure();
+                if (!cardWidth) return;
+                offset = Math.round(offset / cardWidth) * cardWidth + dir * cardWidth;
+                if (offset < 0) offset += half;
+                if (offset >= half) offset -= half;
                 track.style.transform = `translateX(-${offset}px)`;
                 pauseAndResume(3000);
             }
 
-            document.getElementById('reviewPrev').addEventListener('click', () => snapOffset(-1));
-            document.getElementById('reviewNext').addEventListener('click', () => snapOffset(1));
+            // Measure now, and again once fonts/images settle
+            measure();
+            window.addEventListener('load', measure);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
-            // Pause on hover (desktop)
+            // Recalculate on resize (debounced) — this was the resize bug
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(measure, 150);
+            });
+
+            requestAnimationFrame(tick);
+
+            document.getElementById('reviewPrev').addEventListener('click', () => step(-1));
+            document.getElementById('reviewNext').addEventListener('click', () => step(1));
+
             wrapper.addEventListener('mouseenter', () => pauseAndResume(99999));
-            wrapper.addEventListener('mouseleave', () => { paused = false; clearTimeout(resumeTimer); });
+            wrapper.addEventListener('mouseleave', () => { paused = reduceMotion; clearTimeout(resumeTimer); });
 
-            // Touch swipe (mobile)
             let touchStartX = 0;
             wrapper.addEventListener('touchstart', e => {
                 touchStartX = e.touches[0].clientX;
@@ -1245,28 +1668,49 @@
             wrapper.addEventListener('touchend', e => {
                 const dx = touchStartX - e.changedTouches[0].clientX;
                 if (Math.abs(dx) > 40) {
-                    snapOffset(dx > 0 ? 1 : -1);
+                    step(dx > 0 ? 1 : -1);
                 } else {
-                    paused = false;
+                    paused = reduceMotion;
                 }
             }, { passive: true });
         })();
 
-        // FAQ Accordion functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                const isActive = item.classList.contains('active');
-                
-                // Close all items
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+        // ---- FAQ accordion (keyboard accessible) ----
+        (function () {
+            const questions = Array.from(document.querySelectorAll('.faq-question'));
+
+            function close(btn) {
+                const panel = document.getElementById(btn.getAttribute('aria-controls'));
+                btn.setAttribute('aria-expanded', 'false');
+                if (panel) panel.style.maxHeight = null;
+            }
+
+            function open(btn) {
+                const panel = document.getElementById(btn.getAttribute('aria-controls'));
+                btn.setAttribute('aria-expanded', 'true');
+                // Use real content height so long answers never clip
+                if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
+
+            questions.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                    questions.forEach(close);
+                    if (!isOpen) open(btn);
+                });
             });
-        });
+
+            // Keep the open panel correctly sized if the window changes
+            let faqResize = null;
+            window.addEventListener('resize', () => {
+                clearTimeout(faqResize);
+                faqResize = setTimeout(() => {
+                    questions.forEach(btn => {
+                        if (btn.getAttribute('aria-expanded') === 'true') open(btn);
+                    });
+                }, 150);
+            });
+        })();
     </script>
 </body>
 </html>
