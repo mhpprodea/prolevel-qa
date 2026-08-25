@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - ProLevel QA</title>
+    <title>Contact ProLevel QA — Get a Fixed-Price Testing Quote</title>
+
+    <meta name="description" content="Tell us about your website or app and we'll reply within 24 hours with what we'd test, how long it takes, and a fixed price.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://prolevelqa.com/contact.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prolevelqa.com/contact.html">
+    <meta property="og:site_name" content="ProLevel QA">
+    <meta property="og:title" content="Contact ProLevel QA">
+    <meta property="og:description" content="Tell us about your website or app and we'll reply within 24 hours with a fixed price.">
+    <meta property="og:image" content="https://prolevelqa.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%234f46e5'/><stop offset='50%' style='stop-color:%237c3aed'/><stop offset='100%' style='stop-color:%2306b6d4'/></linearGradient></defs><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='60' font-weight='bold' fill='url(%23g)'>PQ</text></svg>">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -19,11 +28,7 @@
             background: #ffffff;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* Header */
         header {
@@ -37,11 +42,12 @@
             border-bottom: 1px solid rgba(79, 70, 229, 0.1);
         }
 
-        nav {
+        /* nav also carries .container, whose padding would win on specificity */
+        nav.container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 0;
+            padding: 1.25rem 20px;
         }
 
         .logo {
@@ -55,19 +61,7 @@
             text-decoration: none;
         }
 
-        .logo::before {
-            content: '✦';
-            position: absolute;
-            left: -30px;
-            color: #4f46e5;
-            font-size: 1.1rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
 
         .nav-links a {
             text-decoration: none;
@@ -81,28 +75,49 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
             background: linear-gradient(90deg, #4f46e5, #7c3aed, #06b6d4);
             transition: width 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #4f46e5;
+        .nav-links a:hover, .nav-links a:focus-visible { color: #4f46e5; }
+        .nav-links a:hover::after, .nav-links a:focus-visible::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 44px; height: 44px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-toggle span {
+            display: block;
+            width: 24px; height: 2px;
+            background: #4f46e5;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 3px solid #06b6d4;
+            outline-offset: 2px;
         }
 
         /* Hero */
         .hero {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #06b6d4 100%);
             color: white;
-            padding: 150px 0 80px;
-            margin-top: 80px;
+            padding: 140px 0 70px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -111,33 +126,18 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
             opacity: 0.4;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .hero p { font-size: 1.25rem; opacity: 0.95; position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
 
-        .hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Contact Form Section */
+        /* Form */
         .contact-section {
-            padding: 80px 0 100px;
+            padding: 70px 0 100px;
             background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 100%);
         }
 
@@ -151,49 +151,57 @@
             border: 1px solid rgba(79, 70, 229, 0.1);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .form-intro {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
         }
+
+        .form-group { margin-bottom: 1.5rem; }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 600;
             color: #1e293b;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        .required {
-            color: #ef4444;
+        .field-hint {
+            display: block;
+            font-weight: 400;
+            color: #94a3b8;
+            font-size: 0.92rem;
+            margin-bottom: 0.5rem;
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .required { color: #ef4444; }
+
+        input[type="text"], input[type="email"], input[type="url"], textarea, select {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-family: inherit;
+            color: #1a1a2e;
             transition: all 0.3s;
             background: #f8f9ff;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #4f46e5;
             background: white;
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
 
-        textarea {
-            min-height: 150px;
-            resize: vertical;
+        input[aria-invalid="true"], textarea[aria-invalid="true"] {
+            border-color: #ef4444;
+            background: #fff5f5;
         }
+
+        textarea { min-height: 150px; resize: vertical; }
 
         select {
             cursor: pointer;
@@ -202,6 +210,27 @@
             background-repeat: no-repeat;
             background-position: right 1rem center;
             padding-right: 3rem;
+        }
+
+        .error-text {
+            display: none;
+            color: #dc2626;
+            font-size: 0.92rem;
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        .error-text.show { display: block; }
+
+        /* Honeypot — positioned off-screen rather than display:none,
+           because many bots skip fields that are explicitly hidden. */
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
 
         .submit-btn {
@@ -218,15 +247,18 @@
             box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(79, 70, 229, 0.4);
         }
 
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .form-note {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.92rem;
+            margin-top: 1.25rem;
         }
 
         .success-message {
@@ -241,9 +273,22 @@
             font-weight: 600;
         }
 
-        .success-message.show {
-            display: block;
+        .success-message.show { display: block; }
+
+        .failure-message {
+            display: none;
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            color: #991b1b;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
         }
+
+        .failure-message.show { display: block; }
+        .failure-message a { color: #991b1b; }
 
         /* Footer */
         footer {
@@ -257,65 +302,72 @@
         footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
         }
 
-        footer p {
-            opacity: 0.8;
-        }
+        footer p { opacity: 0.8; }
+        footer a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+        footer a:hover { color: #06b6d4; }
 
-        footer a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #06b6d4;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
             }
+        }
 
-            .form-container {
-                padding: 2rem;
-            }
+        @media (max-width: 860px) {
+            .nav-toggle { display: flex; }
 
             .nav-links {
-                gap: 0.6rem;
-                font-size: 0.9rem;
-            }
-            
-            .nav-links a {
-                padding: 0.25rem 0;
-                white-space: nowrap;
-            }
-
-            .logo::before {
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 0.5rem 20px 1rem;
+                box-shadow: 0 12px 30px rgba(79, 70, 229, 0.12);
+                border-bottom: 1px solid rgba(79, 70, 229, 0.1);
                 display: none;
             }
-            
-            .logo {
-                font-size: 1.1rem;
+
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; }
+
+            .nav-links a {
+                display: block;
+                padding: 0.9rem 0;
+                border-bottom: 1px solid rgba(79, 70, 229, 0.08);
             }
+
+            .nav-links a::after { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 110px 0 55px; }
+            .hero h1 { font-size: 2.1rem; }
+            .hero p { font-size: 1.05rem; }
+            .contact-section { padding: 50px 0 70px; }
+            .form-container { padding: 1.75rem 1.4rem; }
         }
     </style>
 </head>
 <body>
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <iframe name="hidden_iframe" id="hidden_iframe" title="Form submission target" style="display:none;"></iframe>
+
     <header>
         <nav class="container">
             <a href="index.html" class="logo">ProLevel QA</a>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="about.html">About</a></li>
                 <li><a href="bug_demo.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="index.html#faq">FAQ</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
@@ -324,35 +376,81 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <p>Tell us about your project and we'll get back to you within 24 hours</p>
+            <h1>Tell Us About Your Project</h1>
+            <p>Send us your site or application along with your main concerns. We'll reply within 24 hours with a proposed scope, a timeline, and a fixed price.</p>
         </div>
     </section>
 
     <section class="contact-section">
         <div class="container">
             <div class="form-container">
-                <div class="success-message" id="successMessage">
-                    ✓ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+                <div class="success-message" id="successMessage" role="status">
+                    ✓ Thank you — your message has been sent. We'll get back to you within 24 hours.
                 </div>
 
-                <form id="contactForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe0u5vzo06iB43BDKMNr_JuDedfsD4fHmuvG8j6vIzzL4-K1A/formResponse" method="POST" target="hidden_iframe">
+                <div class="failure-message" id="failureMessage" role="alert">
+                    Something went wrong sending your message. Please email us directly at
+                    <a href="mailto:hello@prolevelqa.com">hello@prolevelqa.com</a> and we'll pick it up straight away.
+                </div>
+
+                <p class="form-intro">The more you tell us, the more useful our reply will be. Fields marked <span class="required">*</span> are required.</p>
+
+                <form id="contactForm"
+                      action="https://docs.google.com/forms/d/e/1FAIpQLSe0u5vzo06iB43BDKMNr_JuDedfsD4fHmuvG8j6vIzzL4-K1A/formResponse"
+                      method="POST"
+                      target="hidden_iframe"
+                      novalidate>
+
                     <div class="form-group">
-                        <label for="name">Name <span class="required">*</span></label>
-                        <input type="text" id="name" name="entry.68128065" required>
+                        <label for="name">Your name <span class="required">*</span></label>
+                        <input type="text" id="name" name="entry.68128065" autocomplete="name" required>
+                        <span class="error-text" id="err-name">Please enter your name.</span>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="entry.392357496" required>
+                        <input type="email" id="email" name="entry.392357496" autocomplete="email" required>
+                        <span class="error-text" id="err-email">Please enter a valid email address so we can reply.</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Project Details <span class="required">*</span></label>
-                        <textarea id="message" name="entry.758001269" required placeholder="Tell us about your testing needs, project type, current issues, or any specific requirements..."></textarea>
+                        <label for="siteUrl">Link to your site or app</label>
+                        <span class="field-hint">Optional, but it lets us give you a far more useful reply. A staging link is fine.</span>
+                        <input type="text" id="siteUrl" inputmode="url" placeholder="https://">
                     </div>
 
+                    <div class="form-group">
+                        <label for="packageChoice">Which package are you interested in?</label>
+                        <select id="packageChoice">
+                            <option value="Not sure yet">Not sure yet — help me choose</option>
+                            <option value="Basic ($349)">Basic — $349</option>
+                            <option value="Standard ($749)">Standard — $749</option>
+                            <option value="Complete ($1,399)">Complete — $1,399</option>
+                            <option value="Monthly testing ($1,199/mo)">Ongoing monthly testing — $1,199/mo</option>
+                            <option value="Something else / custom">Something else — needs a custom quote</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="worry">Project details <span class="required">*</span></label>
+                        <span class="field-hint">What you're building, what you'd like us to focus on, and any deadline you're working to.</span>
+                        <textarea id="worry" required placeholder="Briefly describe your product, what concerns you most, and any deadline you're working to."></textarea>
+                        <span class="error-text" id="err-worry">Please tell us a little about the project — a sentence or two is enough.</span>
+                    </div>
+
+                    <!-- Honeypot: invisible to people, irresistible to bots. -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="company_website">Do not fill this in</label>
+                        <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <!-- Everything above is combined into this one field, which is the
+                         "Project Details" question that already exists in the Google Form.
+                         That means no changes are needed on the Google Forms side. -->
+                    <input type="hidden" id="combinedDetails" name="entry.758001269">
+
                     <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                    <p class="form-note">We reply to every real enquiry within 24 hours.</p>
                 </form>
             </div>
         </div>
@@ -362,35 +460,153 @@
         <div class="container">
             <p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
             <p style="margin-top: 1rem; font-size: 0.9rem;">
-                <a href="index.html">Home</a> | 
-                <a href="about.html">About</a> | 
+                <a href="index.html">Home</a> |
+                <a href="about.html">About</a> |
                 <a href="privacy.html">Privacy Policy</a>
             </p>
         </div>
     </footer>
 
     <script>
-        const form = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
+        // ---- Mobile navigation ----
+        (function () {
+            const toggle = document.getElementById('navToggle');
+            const links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
 
-        form.addEventListener('submit', function(e) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            function setOpen(open) {
+                links.classList.toggle('open', open);
+                toggle.setAttribute('aria-expanded', String(open));
+                toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            }
 
-            // Show success message after a brief delay
-            setTimeout(function() {
-                form.reset();
-                successMessage.classList.add('show');
-                submitBtn.textContent = 'Message Sent!';
-                
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
+            toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+            links.addEventListener('click', e => { if (e.target.tagName === 'A') setOpen(false); });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
+            });
+            window.addEventListener('resize', () => { if (window.innerWidth > 860) setOpen(false); });
+        })();
+
+        // ---- Contact form ----
+        (function () {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const failureMessage = document.getElementById('failureMessage');
+            const iframe = document.getElementById('hidden_iframe');
+            const combined = document.getElementById('combinedDetails');
+            const honeypot = document.getElementById('company_website');
+            const packageChoice = document.getElementById('packageChoice');
+
+            const loadedAt = Date.now();
+            let submitting = false;
+            let settled = false;
+            let timeoutId = null;
+
+            // Preselect the package if the visitor arrived from a pricing button
+            try {
+                const wanted = (new URLSearchParams(window.location.search).get('package') || '').toLowerCase();
+                const map = {
+                    basic: 'Basic ($349)',
+                    standard: 'Standard ($749)',
+                    complete: 'Complete ($1,399)',
+                    monthly: 'Monthly testing ($1,199/mo)',
+                    custom: 'Something else / custom'
+                };
+                if (map[wanted]) packageChoice.value = map[wanted];
+            } catch (err) { /* no query string support, ignore */ }
+
+            function showError(id, show) {
+                const el = document.getElementById('err-' + id);
+                const field = document.getElementById(id);
+                if (el) el.classList.toggle('show', show);
+                if (field) field.setAttribute('aria-invalid', String(show));
+            }
+
+            function validate() {
+                let firstBad = null;
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                const siteUrl = document.getElementById('siteUrl');
+                const worry = document.getElementById('worry');
+
+                // Only three required fields, same as before — the spam filtering
+                // is done by the honeypot and time-trap, which cost the visitor nothing.
+                const checks = [
+                    ['name', name.value.trim().length >= 2],
+                    ['email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())],
+                    ['worry', worry.value.trim().length >= 15]
+                ];
+
+                checks.forEach(([id, ok]) => {
+                    showError(id, !ok);
+                    if (!ok && !firstBad) firstBad = document.getElementById(id);
+                });
+
+                if (firstBad) firstBad.focus();
+                return !firstBad;
+            }
+
+            function finish(ok) {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timeoutId);
+                submitting = false;
+
+                if (ok) {
+                    form.reset();
+                    successMessage.classList.add('show');
+                    submitBtn.textContent = 'Message Sent';
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Message';
+                        settled = false;
+                    }, 6000);
+                } else {
+                    failureMessage.classList.add('show');
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Send Message';
-                }, 5000);
-            }, 1000);
-        });
+                    settled = false;
+                }
+            }
+
+            form.addEventListener('submit', function (e) {
+                // Bot check 1: honeypot filled
+                if (honeypot.value !== '') { e.preventDefault(); return; }
+
+                // Bot check 2: submitted implausibly fast for a human
+                if (Date.now() - loadedAt < 3000) { e.preventDefault(); return; }
+
+                if (!validate()) { e.preventDefault(); return; }
+
+                // Fold the extra answers into the single Google Form field
+                const url = document.getElementById('siteUrl').value.trim();
+                const pkg = packageChoice.value;
+                const worry = document.getElementById('worry').value.trim();
+                combined.value =
+                    'Site / app: ' + (url || 'not provided') + '\n' +
+                    'Interested in: ' + pkg + '\n' +
+                    '--------------------\n' +
+                    worry;
+
+                submitting = true;
+                settled = false;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending…';
+                failureMessage.classList.remove('show');
+
+                // Real confirmation: the hidden iframe finishing its POST.
+                // (The old version showed success after a fixed 1s timer whether
+                // or not anything was actually sent.)
+                timeoutId = setTimeout(() => finish(false), 12000);
+            });
+
+            iframe.addEventListener('load', function () {
+                if (submitting) finish(true);
+            });
+        })();
     </script>
 </body>
 </html>

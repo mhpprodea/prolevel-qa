@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | ProLevel QA — Practical Software Testing Notes</title>
+<meta name="description" content="Practical articles on software testing: what to check before launch, what QA costs, and how to judge a tester&#x27;s work.">
+<link rel="canonical" href="https://prolevelqa.com/blog.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://prolevelqa.com/blog.html">
+<meta property="og:site_name" content="ProLevel QA">
+<meta property="og:title" content="Blog | ProLevel QA — Practical Software Testing Notes">
+<meta property="og:description" content="Practical articles on software testing: what to check before launch, what QA costs, and how to judge a tester&#x27;s work.">
+<meta property="og:image" content="https://prolevelqa.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%234f46e5'/><stop offset='50%25' style='stop-color:%237c3aed'/><stop offset='100%25' style='stop-color:%2306b6d4'/></linearGradient></defs><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='60' font-weight='bold' fill='url(%23g)'>PQ</text></svg>">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:#1a1a2e;background:#fff}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+header{background:rgba(255,255,255,.95);backdrop-filter:blur(20px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 4px 30px rgba(79,70,229,.08);border-bottom:1px solid rgba(79,70,229,.1)}
+nav.container{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 20px}
+.logo{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;position:relative}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:#4a5568;font-weight:500;transition:all .3s;position:relative;padding:.5rem 0}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,#4f46e5,#7c3aed,#06b6d4);transition:width .3s}
+.nav-links a:hover,.nav-links a:focus-visible{color:#4f46e5}
+.nav-links a:hover::after,.nav-links a:focus-visible::after,.nav-links a.active::after{width:100%}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:44px;height:44px;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.nav-toggle span{display:block;width:24px;height:2px;background:#4f46e5;border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+a:focus-visible,button:focus-visible{outline:3px solid #06b6d4;outline-offset:3px;border-radius:4px}
+.page-hero{background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 40%,#06b6d4 100%);color:#fff;padding:140px 0 60px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,255,255,.15) 0,transparent 50%),radial-gradient(circle at 80% 80%,rgba(255,255,255,.1) 0,transparent 50%);opacity:.5}
+.page-hero .container{position:relative;z-index:1}
+.page-hero h1{font-size:2.9rem;font-weight:800;line-height:1.2;max-width:900px;margin-bottom:1rem}
+.page-hero p{font-size:1.2rem;opacity:.95;max-width:760px}
+.post-meta{font-size:1rem;opacity:.9;margin-top:1.25rem;display:flex;gap:1.25rem;flex-wrap:wrap}
+main{padding:60px 0 90px;background:linear-gradient(180deg,#f8f9ff 0%,#fff 60%)}
+.post-body{max-width:840px;margin:0 auto;font-size:1.11rem;color:#334155}
+.post-body h2{font-size:1.85rem;font-weight:700;color:#1e293b;margin:2.75rem 0 1rem;line-height:1.3}
+.post-body h3{font-size:1.3rem;font-weight:600;color:#1e293b;margin:2rem 0 .75rem}
+.post-body p{margin-bottom:1.35rem;line-height:1.8}
+.post-body ul,.post-body ol{margin:0 0 1.5rem 1.35rem}
+.post-body li{margin-bottom:.65rem;line-height:1.75}
+.post-body strong{color:#1e293b;font-weight:600}
+.post-body a{color:#4f46e5;text-decoration:none;border-bottom:1px solid rgba(79,70,229,.35);transition:border-color .2s}
+.post-body a:hover{border-color:#4f46e5}
+.post-body blockquote{border-left:4px solid #7c3aed;background:#f8f9ff;padding:1.1rem 1.4rem;margin:0 0 1.5rem;border-radius:0 12px 12px 0;color:#475569}
+.post-body blockquote p:last-child{margin-bottom:0}
+.table-wrap{overflow-x:auto;margin:0 0 1.75rem;-webkit-overflow-scrolling:touch}
+.post-body table{border-collapse:collapse;width:100%;min-width:460px;font-size:1rem}
+.post-body th{background:#eef2ff;color:#1e293b;font-weight:600;text-align:left;padding:.85rem 1rem;border-bottom:2px solid rgba(79,70,229,.2)}
+.post-body td{padding:.8rem 1rem;border-bottom:1px solid #e2e8f0;color:#475569;vertical-align:top}
+.post-body tr:last-child td{border-bottom:none}
+.post-body code{background:#eef2ff;padding:.15rem .4rem;border-radius:5px;font-size:.94em;color:#4338ca}
+.post-cta{max-width:840px;margin:3.5rem auto 0;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 45%,#06b6d4 100%);color:#fff;border-radius:24px;padding:2.5rem}
+.post-cta h2{font-size:1.6rem;margin:0 0 .6rem;font-weight:700}
+.post-cta p{opacity:.95;margin-bottom:1.5rem}
+.post-cta a{display:inline-block;background:#fff;color:#4f46e5;padding:.95rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:transform .3s,box-shadow .3s}
+.post-cta a:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.back-link{max-width:760px;margin:2.5rem auto 0;font-size:1rem}
+.back-link a{color:#4f46e5;text-decoration:none;font-weight:600}
+.post-list{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem}
+.post-card{background:#fff;border:1px solid rgba(79,70,229,.15);border-left:4px solid #7c3aed;border-radius:16px;padding:1.9rem 2rem;box-shadow:0 6px 24px rgba(79,70,229,.06);transition:transform .3s,box-shadow .3s}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(79,70,229,.13)}
+.post-card time{font-size:.92rem;color:#94a3b8;font-weight:500;letter-spacing:.02em}
+.post-card h2{font-size:1.4rem;margin:.4rem 0 .6rem;line-height:1.35}
+.post-card h2 a{color:#1e293b;text-decoration:none}
+.post-card h2 a:hover{color:#4f46e5}
+.post-card p{color:#64748b;line-height:1.7}
+.post-card .read{display:inline-block;margin-top:1rem;color:#4f46e5;font-weight:600;text-decoration:none}
+.blog-empty{max-width:820px;margin:0 auto;text-align:center;color:#64748b;font-size:1.1rem}
+footer{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);color:#fff;padding:4rem 0;text-align:center;position:relative}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+footer p{opacity:.8}
+footer a{color:rgba(255,255,255,.8);text-decoration:none;transition:color .3s}
+footer a:hover{color:#06b6d4}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media (max-width:860px){
+ .nav-toggle{display:flex}
+ .nav-links{position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:.5rem 20px 1rem;box-shadow:0 12px 30px rgba(79,70,229,.12);border-bottom:1px solid rgba(79,70,229,.1);display:none}
+ .nav-links.open{display:flex}
+ .nav-links li{width:100%}
+ .nav-links a{display:block;padding:.9rem 0;border-bottom:1px solid rgba(79,70,229,.08)}
+ .nav-links a::after{display:none}
+}
+@media (max-width:768px){
+ .page-hero{padding:110px 0 45px}
+ .page-hero h1{font-size:1.85rem}
+ .page-hero p{font-size:1.05rem}
+ main{padding:40px 0 60px}
+ .post-body{font-size:1.05rem}
+ .post-body h2{font-size:1.45rem}
+ .post-body h3{font-size:1.15rem}
+ .post-cta{padding:1.9rem 1.5rem;border-radius:18px}
+ .post-card{padding:1.5rem 1.4rem}
+ .post-card h2{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+<header><nav class="container">
+<a href="index.html" class="logo">ProLevel QA</a>
+<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="bug_demo.html">Portfolio</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="contact.html">Contact Us</a></li></ul>
+</nav></header>
+<section class="page-hero"><div class="container">
+<h1>Blog</h1>
+<p>Practical writing about finding bugs, judging quality, and deciding when your product needs a tester. No filler.</p>
+</div></section>
+<main><div class="container">
+<div class="post-list" id="postList">
+<article class="post-card" data-publish="2026-08-25" hidden>
+<time datetime="2026-08-25">25 August 2026</time>
+<h2><a href="blog-how-much-does-pre-launch-qa-testing-cost.html">How Much Does Pre-Launch QA Testing Cost?</a></h2>
+<p>Pre-launch QA testing costs between $300 and $1,500 for most websites and apps. Here is what drives the price, and what you should get for it.</p>
+<a class="read" href="blog-how-much-does-pre-launch-qa-testing-cost.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-26" hidden>
+<time datetime="2026-08-26">26 August 2026</time>
+<h2><a href="blog-what-to-test-before-you-launch-the-short-checklist.html">What To Test Before You Launch: The Short Checklist</a></h2>
+<p>A pre-launch testing checklist short enough to actually finish. 22 checks, grouped by risk, covering the failures that cost real money.</p>
+<a class="read" href="blog-what-to-test-before-you-launch-the-short-checklist.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-27" hidden>
+<time datetime="2026-08-27">27 August 2026</time>
+<h2><a href="blog-how-long-does-qa-testing-take-before-a-launch.html">How Long Does QA Testing Take Before A Launch?</a></h2>
+<p>Pre-launch testing takes three days for a single flow and up to two weeks for a large product. Here is how to work out your own timeline.</p>
+<a class="read" href="blog-how-long-does-qa-testing-take-before-a-launch.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-28" hidden>
+<time datetime="2026-08-28">28 August 2026</time>
+<h2><a href="blog-do-you-need-a-manual-tester-if-you-already-have-automated-te.html">Do You Need A Manual Tester If You Already Have Automated Tests?</a></h2>
+<p>Automated tests check what you already thought of. Here is what they structurally cannot catch, and how to tell if that gap is costing you.</p>
+<a class="read" href="blog-do-you-need-a-manual-tester-if-you-already-have-automated-te.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-29" hidden>
+<time datetime="2026-08-29">29 August 2026</time>
+<h2><a href="blog-the-five-bugs-we-find-in-almost-every-checkout.html">The Five Bugs We Find In Almost Every Checkout</a></h2>
+<p>Five checkout bugs that appear in almost every store we test, why they survive automated testing, and how to check for each one yourself.</p>
+<a class="read" href="blog-the-five-bugs-we-find-in-almost-every-checkout.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-30" hidden>
+<time datetime="2026-08-30">30 August 2026</time>
+<h2><a href="blog-signs-your-product-needs-a-dedicated-tester.html">Signs Your Product Needs A Dedicated Tester</a></h2>
+<p>Seven signals that your team has outgrown testing its own work, and what to do about each one.</p>
+<a class="read" href="blog-signs-your-product-needs-a-dedicated-tester.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-08-31" hidden>
+<time datetime="2026-08-31">31 August 2026</time>
+<h2><a href="blog-when-should-a-startup-hire-its-first-qa-tester.html">When Should A Startup Hire Its First QA Tester?</a></h2>
+<p>Most startups hire a tester too late, and a few hire too early. Here are the four conditions that actually justify the hire.</p>
+<a class="read" href="blog-when-should-a-startup-hire-its-first-qa-tester.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-09-01" hidden>
+<time datetime="2026-09-01">01 September 2026</time>
+<h2><a href="blog-freelance-tester-or-testing-agency-how-to-choose.html">Freelance Tester Or Testing Agency: How To Choose</a></h2>
+<p>The real differences between a freelance tester and a QA agency: who does the work, what you pay for, and which suits your situation.</p>
+<a class="read" href="blog-freelance-tester-or-testing-agency-how-to-choose.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-09-02" hidden>
+<time datetime="2026-09-02">02 September 2026</time>
+<h2><a href="blog-in-house-qa-or-outsourced-the-real-cost-comparison.html">In-House QA Or Outsourced: The Real Cost Comparison</a></h2>
+<p>A full cost comparison of hiring a tester versus buying testing, including the costs people forget on both sides.</p>
+<a class="read" href="blog-in-house-qa-or-outsourced-the-real-cost-comparison.html">Read the article &rarr;</a>
+</article>
+<article class="post-card" data-publish="2026-09-03" hidden>
+<time datetime="2026-09-03">03 September 2026</time>
+<h2><a href="blog-how-to-judge-a-testers-work-before-you-hire-them.html">How To Judge A Tester&#x27;s Work Before You Hire Them</a></h2>
+<p>How to assess a tester&#x27;s quality from their bug reports, in five checks, without being technical yourself.</p>
+<a class="read" href="blog-how-to-judge-a-testers-work-before-you-hire-them.html">Read the article &rarr;</a>
+</article>
+</div>
+<p class="blog-empty" id="blogEmpty" hidden>The first article goes live shortly. Check back soon.</p>
+</div></main>
+<footer><div class="container">
+<p>&copy; 2026 ProLevel QA. Delivering quality through thoughtful testing.</p>
+<p style="margin-top:1rem;font-size:.9rem;"><a href="index.html">Home</a> | <a href="blog.html">Blog</a> | <a href="index.html#pricing">Pricing</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy Policy</a></p>
+</div></footer>
+<script>
+(function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');if(!t||!l)return;
+function s(o){l.classList.toggle('open',o);t.setAttribute('aria-expanded',String(o));t.setAttribute('aria-label',o?'Close menu':'Open menu');}
+t.addEventListener('click',function(){s(t.getAttribute('aria-expanded')!=='true');});
+l.addEventListener('click',function(e){if(e.target.tagName==='A')s(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&t.getAttribute('aria-expanded')==='true'){s(false);t.focus();}});
+window.addEventListener('resize',function(){if(window.innerWidth>860)s(false);});})();
+
+(function(){
+  // Each card carries its publish date. Show only the ones that have arrived,
+  // newest first. Uploading every file once is enough - posts appear on schedule.
+  var today=new Date();today.setHours(0,0,0,0);
+  var list=document.getElementById('postList');
+  var cards=Array.prototype.slice.call(list.querySelectorAll('.post-card'));
+  var live=cards.filter(function(c){
+    var p=c.getAttribute('data-publish');if(!p)return true;
+    var d=new Date(p+'T00:00:00');return d<=today;
+  });
+  live.sort(function(a,b){return a.getAttribute('data-publish')<b.getAttribute('data-publish')?1:-1;});
+  live.forEach(function(c){c.hidden=false;list.appendChild(c);});
+  if(!live.length){document.getElementById('blogEmpty').hidden=false;}
+})();
+</script>
+</body>
+</html>
